@@ -1,0 +1,75 @@
+---
+// src/pages/terms.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Terms of Service & SLA | Web Harbor Solutions"
+  description="Complete terms of service, billing schedules, 6-month term parameters, and scope boundaries for Web Harbor Solutions clients."
+  canonical="https://webharborsolutions.com/terms/"
+>
+  <main class="py-16 md:py-24 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white/80 dark:bg-slate-900/80 p-8 sm:p-14 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md space-y-8">
+        <div>
+          <span class="text-xs font-bold text-accent-blue dark:text-blue-400 uppercase tracking-wider">Client Service Agreement</span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-slate-50 mt-1 font-display">Terms of Service &amp; SLA</h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Last Updated: October 2026 • Web Harbor Solutions Client Service Parameters</p>
+        </div>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">1. Agreement Overview</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            These Terms of Service constitute a legally binding service agreement between Web Harbor Solutions ("Company") and the client ("Client"). By approving a website prototype for production launch or issuing initial setup payments, Client agrees to all terms, billing cycles, and policies outlined herein.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">2. Fees &amp; Payment Terms</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
+            <li><strong>Setup Fee:</strong> A one-time setup fee of $100 USD is payable in two equal installments: 50% ($50) prior to production launch on the client domain, and the remaining 50% ($50) only after verification that the website is successfully live on the domain.</li>
+            <li><strong>Monthly Service Retainer:</strong> $99 USD per month, commencing on the calendar date the website is pointed live to the Client's primary domain.</li>
+            <li><strong>Minimum Service Commitment:</strong> Six (6) consecutive calendar months from the verified go-live date.</li>
+            <li><strong>Cancellation Policy:</strong> Following the completion of the initial 6-month term, Client may cancel services at any time by providing thirty (30) days written notice via email to <code class="text-accent-teal font-mono text-xs">webharborsolutions@gmail.com</code> with zero penalty fees.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">3. Included Scope of Service</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
+            <li><strong>Turnkey Development:</strong> Hand-crafted static website engineered with modern semantic HTML and Tailwind CSS.</li>
+            <li><strong>Infrastructure &amp; Uptime:</strong> High-performance edge hosting on Cloudflare's global network with SSL certificates and 99.9% uptime SLA.</li>
+            <li><strong>Domain Management:</strong> Domain registration and annual renewals managed by Web Harbor Solutions at $0 additional expense during active subscription.</li>
+            <li><strong>Monthly Maintenance Allowance:</strong> Up to three (3) minor content updates per calendar month (e.g. changing text copy, updating business hours, swapping images, adding seasonal promotions). Monthly updates do not roll over between billing cycles.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">4. Domain Ownership &amp; Code Release</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            The domain name registered on behalf of the Client is the sole property of the Client. In the event of service cancellation following the initial 6-month term, Web Harbor Solutions will initiate a domain transfer authorization code (EPP code) to the Client's chosen registrar within five (5) business days at zero transfer cost.
+          </p>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            Because our static architecture is deeply integrated into our proprietary deployment workflows, code repository export files are not provided upon cancellation; however, Client maintains full legal rights to all copy, logos, branding assets, and photography supplied by Client.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">5. Service Level Agreement (SLA) &amp; Response Times</h2>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
+            <li><strong>Support Inquiries:</strong> Guaranteed technical acknowledgment within 12 business hours.</li>
+            <li><strong>Content Maintenance Requests:</strong> Execution within 24 to 48 business hours.</li>
+            <li><strong>Emergency Downtime:</strong> Immediate triage and priority resolution within 4 business hours.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">6. Governing Law &amp; Dispute Resolution</h2>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            These terms shall be governed by and construed in accordance with standard commercial contract law. Both parties agree that any disputes arising from this agreement shall be settled through amicable good-faith negotiation between the Client and Web Harbor Solutions leadership.
+          </p>
+        </section>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

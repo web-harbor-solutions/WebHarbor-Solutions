@@ -1,0 +1,247 @@
+---
+// src/pages/portfolio.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    id: 'apex',
+    title: 'Apex Plumbing & Drain Co.',
+    category: 'home',
+    categoryLabel: 'Home Services',
+    tags: ['Plumbing', '24/7 Dispatch', 'Edge Static'],
+    description: 'High-converting local plumbing showcase engineered for instant emergency mobile calls and quote requests.',
+    features: [
+      'Click-to-call sticky emergency mobile header',
+      'Instant service area zip-code lookup tool',
+      'Google Review badge & customer testimonials',
+      '99 Mobile PageSpeed with sub-second LCP',
+    ],
+    demoUrl: 'https://apex-plumbing-demo.pages.dev',
+    gradient: 'from-blue-600 to-cyan-600',
+  },
+  {
+    id: 'goldencrust',
+    title: 'Golden Crust Artisan Bakery',
+    category: 'food',
+    categoryLabel: 'Food & Beverage',
+    tags: ['Bakery', 'Catering Orders', 'Local SEO'],
+    description: 'Visual culinary showcase featuring daily seasonal bake schedules, wholesale catering forms, and maps routing.',
+    features: [
+      'Interactive visual menu with dietary filters',
+      'Catering request inquiry builder',
+      'Live opening hours and map directions',
+      'Lightweight image optimization via WebP',
+    ],
+    demoUrl: 'https://golden-crust-demo.pages.dev',
+    gradient: 'from-amber-600 to-orange-600',
+  },
+  {
+    id: 'precision',
+    title: 'Precision Climate HVAC',
+    category: 'home',
+    categoryLabel: 'Home Services',
+    tags: ['HVAC', 'Seasonal Tune-Ups', 'Lead Capture'],
+    description: 'Clean energy HVAC contractor platform optimized for residential furnace replacements and AC seasonal prep.',
+    features: [
+      'Seasonal maintenance savings calculator',
+      'Emergency furnace breakdown dispatch form',
+      'Trade licensing & EPA certification badges',
+      'Structured local schema for map-pack SEO',
+    ],
+    demoUrl: 'https://precision-climate-demo.pages.dev',
+    gradient: 'from-sky-600 to-blue-700',
+  },
+  {
+    id: 'northstar',
+    title: 'Northstar Family Chiropractic',
+    category: 'health',
+    categoryLabel: 'Health & Wellness',
+    tags: ['Healthcare', 'Appointment Intake', 'HIPAA Baseline'],
+    description: 'Patient-centric wellness practice site with condition directory, new patient specials, and online consultation intake.',
+    features: [
+      'Interactive "Conditions Treated" symptom guide',
+      'First-visit consultation onboarding form',
+      'Verified patient video/quote reviews',
+      'Fast accessible WCAG 2.1 AA typography',
+    ],
+    demoUrl: 'https://northstar-chiro-demo.pages.dev',
+    gradient: 'from-teal-600 to-emerald-700',
+  },
+];
+---
+
+<BaseLayout
+  title="Live Client Demos & Work Samples | Web Harbor Solutions"
+  description="Browse interactive live demos built for local contractors, restaurants, healthcare clinics, and service businesses across the US."
+  canonical="https://webharborsolutions.com/portfolio/"
+>
+  <!-- Header -->
+  <section class="pt-16 pb-12 md:pt-24 md:pb-16 text-center relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent-blue/10 text-accent-blue dark:text-blue-400 border border-blue-500/20 mb-6 backdrop-blur-md">
+        <span>Production Work Showcase</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-primary-dark dark:text-slate-50 font-display tracking-tight mb-6">
+        Real Code. Real Businesses. Real Performance.
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        Every website featured below began as a completely free, unrequested spec prototype. Explore the live edge builds below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filterable Showcase -->
+  <section class="py-12 md:py-20 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-2.5 mb-14">
+        <button
+          type="button"
+          class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition bg-accent-blue text-white border-accent-blue shadow-xs"
+          data-filter="all"
+        >
+          All Demos
+        </button>
+        <button
+          type="button"
+          class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-accent-blue backdrop-blur-md"
+          data-filter="home"
+        >
+          Home Services
+        </button>
+        <button
+          type="button"
+          class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-accent-blue backdrop-blur-md"
+          data-filter="food"
+        >
+          Food &amp; Beverage
+        </button>
+        <button
+          type="button"
+          class="filter-tab px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold border transition bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-accent-blue backdrop-blur-md"
+          data-filter="health"
+        >
+          Health &amp; Wellness
+        </button>
+      </div>
+
+      <!-- Project Cards Grid (With 3D Tilt Cards) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="portfolio-grid">
+        {projects.map((p) => (
+          <div
+            data-tilt
+            class="portfolio-item rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300 overflow-hidden flex flex-col justify-between"
+            data-category={p.category}
+          >
+            <!-- Card Visual Banner -->
+            <div class={`h-40 bg-gradient-to-r ${p.gradient} p-6 flex flex-col justify-between text-white relative`}>
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold uppercase tracking-wider bg-black/30 px-2.5 py-1 rounded-md backdrop-blur-md">
+                  {p.categoryLabel}
+                </span>
+                <span class="text-xs font-mono font-semibold bg-white/20 px-2.5 py-1 rounded backdrop-blur-md">
+                  Live Edge Demo
+                </span>
+              </div>
+              <h3 class="text-2xl font-bold font-display tracking-tight drop-shadow-xs">{p.title}</h3>
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                  {p.description}
+                </p>
+
+                <!-- Feature Highlights -->
+                <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-300 mb-6">
+                  {p.features.map((feat) => (
+                    <li class="flex items-start gap-2">
+                      <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Action Bar -->
+              <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-4">
+                <div class="flex flex-wrap gap-1.5">
+                  {p.tags.map((t) => (
+                    <span class="text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2 py-0.5 rounded">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href="/contact/"
+                  class="inline-flex items-center gap-1.5 text-xs font-bold text-accent-blue dark:text-blue-400 hover:underline shrink-0 group"
+                >
+                  <span>Build One Like This</span>
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition duration-150" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Callout: Don't See Your Industry? -->
+  <section class="py-16 bg-white/50 dark:bg-slate-950/40 border-y border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display mb-4">
+        Don't See Your Industry?
+      </h2>
+      <p class="text-slate-600 dark:text-slate-400 text-sm max-w-xl mx-auto mb-8">
+        We build custom websites for electrical, roofing, landscaping, legal practices, veterinary clinics, auto repair, and more.
+      </p>
+      <a
+        href="/contact/"
+        class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg transition duration-200"
+      >
+        Build Me a Custom Demo in 48 Hours
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupPortfolioFilter() {
+    const tabs = document.querySelectorAll('.filter-tab');
+    const items = document.querySelectorAll('.portfolio-item');
+
+    if (!tabs.length || !items.length) return;
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach((t) => {
+          t.classList.remove('bg-accent-blue', 'text-white', 'border-accent-blue', 'shadow-xs');
+          t.classList.add('bg-white/80', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-700');
+        });
+
+        tab.classList.remove('bg-white/80', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-700');
+        tab.classList.add('bg-accent-blue', 'text-white', 'border-accent-blue', 'shadow-xs');
+
+        const filter = tab.getAttribute('data-filter') || 'all';
+
+        items.forEach((item) => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            (item as HTMLElement).style.display = 'flex';
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupPortfolioFilter);
+</script>

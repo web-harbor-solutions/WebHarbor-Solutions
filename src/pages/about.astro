@@ -1,0 +1,124 @@
+---
+// src/pages/about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Us | Web Harbor Solutions"
+  description="Web Harbor Solutions simplifies web design for small businesses across the US, UK, Canada, and Australia."
+  canonical="https://webharborsolutions.com/about/"
+>
+  <!-- Header -->
+  <section class="pt-16 pb-12 md:pt-24 md:pb-16 text-center relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent-blue/10 text-accent-blue dark:text-blue-400 border border-blue-500/20 mb-6 backdrop-blur-md">
+        <span>Our Mission &amp; Standards</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-primary-dark dark:text-slate-50 font-display tracking-tight mb-6">
+        Built on Proof, Not Pitches.
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        We started Web Harbor Solutions because small business owners were tired of being sold expensive promises by digital agencies that never delivered.
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Philosophy: Show, Don't Tell -->
+  <section class="py-12 md:py-16 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div data-tilt class="p-8 sm:p-12 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
+        <h2 class="text-2xl font-bold text-primary-dark dark:text-slate-100 font-display mb-4">
+          Our Philosophy: "Show, Don't Tell"
+        </h2>
+        <div class="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          <p>
+            When you hire an electrician, you don't pay $5,000 for them to draw a schematic on a whiteboard and walk away. You pay them to wire your building properly and turn the lights on.
+          </p>
+          <p>
+            The web development industry has gotten away with bad incentives for twenty years. Traditional agencies charge astronomical retainers upfront, lock clients into 2-year contracts, and deliver bloated websites that barely run on a smartphone.
+          </p>
+          <p class="font-semibold text-primary-dark dark:text-slate-200">
+            We flipped the equation: We build your complete working website on our own time before you ever sign an agreement or pay a single dollar. If our work doesn't earn your business, you owe us nothing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership Section (Compliant: Abdul Mateen, Founder; no Jason Gill, no LLC/SECP) -->
+  <section class="py-12 md:py-20 bg-white/50 dark:bg-slate-950/40 border-y border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-teal dark:text-teal-400 mb-3">Agency Leadership</h2>
+        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">Direct Accountability</p>
+      </div>
+
+      <div class="max-w-2xl mx-auto">
+        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md flex flex-col sm:flex-row gap-6 items-start transition-all duration-300">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent-blue to-accent-teal flex items-center justify-center text-white font-extrabold text-2xl shadow-md shrink-0">
+            AM
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 font-display">Abdul Mateen</h3>
+            <p class="text-accent-blue dark:text-blue-400 text-xs font-semibold mb-3">Founder</p>
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-3">
+              With a background in enterprise software solutions and cloud infrastructure, Abdul oversees client communication, project delivery, and operations at Web Harbor Solutions.
+            </p>
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+              He ensures that every local trade owner has a direct, reliable partner who respects their time, answers questions plainly without technical jargon, and protects their marketing budget.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Standards & Operations -->
+  <section class="py-16 md:py-24 relative z-10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-blue dark:text-blue-400 mb-3">Trust &amp; Governance</h2>
+        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">How We Operate</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
+          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Commercial Transparency</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            We adhere strictly to US FTC commercial marketing transparency standards, international data privacy guidelines, and clear cancellation terms.
+          </p>
+        </div>
+
+        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
+          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Edge-Grade Infrastructure</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            Every site is deployed on modern static edge infrastructure backed by our 99.9% Uptime SLA and automated global CDN caching.
+          </p>
+        </div>
+
+        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
+          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Zero Offshore Queues</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+            You will never be routed through junior account representatives or support tickets. You communicate directly with the team engineering your site.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 md:py-24 bg-primary-dark text-white relative z-10 text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <h2 class="text-3xl font-extrabold font-display mb-4">See Your Business In Real Code</h2>
+      <p class="text-slate-300 text-sm max-w-xl mx-auto mb-8">
+        Give us 48 hours to research your competitors and build your live prototype. Zero commitment required.
+      </p>
+      <a
+        href="/contact/"
+        class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg transition duration-200"
+      >
+        Claim Your Free Demo Website
+      </a>
+    </div>
+  </section>
+</BaseLayout>

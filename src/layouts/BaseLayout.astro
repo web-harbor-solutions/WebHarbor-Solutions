@@ -1,0 +1,168 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Canvas3D from '../components/Canvas3D.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Web Harbor Solutions | High-Converting Websites for Local Businesses',
+  description = 'We build your custom business website before you pay a dime. Fast, mobile-first websites with hosting and maintenance for just $99/month.',
+  canonical = Astro.url.href,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- OpenGraph / Social Metadata -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Web Harbor Solutions" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Astro 5 ClientRouter for fluid View Transitions -->
+    <ClientRouter />
+
+    <!-- Anti-FOUC Theme Initialization (Synchronous execution before rendering) -->
+    <script is:inline>
+      (function () {
+        function resolveTheme() {
+          try {
+            const stored = localStorage.getItem('theme');
+            if (stored === 'dark' || stored === 'light') {
+              return stored;
+            }
+          } catch (_) {}
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        const theme = resolveTheme();
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+
+      // Preserve theme across Astro View Transitions swaps
+      document.addEventListener('astro:after-swap', () => {
+        try {
+          const stored = localStorage.getItem('theme');
+          const isDark = stored
+            ? stored === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (_) {}
+      });
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col bg-bg-neutral dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-accent-blue selection:text-white relative">
+    <!-- Persistent Full-Page Three.js 3D WebGL Background -->
+    <Canvas3D />
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+      <Navbar currentPath={Astro.url.pathname} />
+
+      <main id="main-content" class="flex-1">
+        <slot />
+      </main>
+
+      <Footer />
+    </div>
+
+    <!-- Lenis Smooth Inertia Scrolling + GSAP ScrollTrigger Integration Script -->
+    <script>
+      import Lenis from 'lenis';
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      let lenisInstance: Lenis | null = null;
+      let tickerFn: ((time: number) => void) | null = null;
+
+      function initSmoothScroll() {
+        // Destroy existing instance to prevent duplicate scroll events across transitions
+        if (lenisInstance) {
+          lenisInstance.destroy();
+          lenisInstance = null;
+        }
+
+        if (tickerFn) {
+          gsap.ticker.remove(tickerFn);
+          tickerFn = null;
+        }
+
+        // Initialize Lenis with inertia and momentum
+        lenisInstance = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          touchMultiplier: 1.5,
+        });
+
+        // Expose to window for potential external access or debugging
+        (window as any).__lenis = lenisInstance;
+
+        // Synchronize Lenis scroll updates with GSAP ScrollTrigger
+        lenisInstance.on('scroll', () => {
+          ScrollTrigger.update();
+        });
+
+        // Synchronize GSAP RAF ticker with Lenis
+        tickerFn = (time: number) => {
+          lenisInstance?.raf(time * 1000);
+        };
+        gsap.ticker.add(tickerFn);
+
+        // Turn off GSAP ticker lag smoothing for maximum responsiveness
+        gsap.ticker.lagSmoothing(0);
+
+        // Recalculate ScrollTrigger markers and layout
+        setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 50);
+      }
+
+      import { initPageAnimations } from '../scripts/animations';
+
+      // Re-initialize Lenis and GSAP ScrollTrigger on every Astro View Transition page-load
+      document.addEventListener('astro:page-load', () => {
+        initSmoothScroll();
+        initPageAnimations();
+      });
+
+      // Cleanup on before-swap to avoid memory leaks
+      document.addEventListener('astro:before-swap', () => {
+        if (lenisInstance) {
+          lenisInstance.destroy();
+          lenisInstance = null;
+        }
+      });
+    </script>
+  </body>
+</html>

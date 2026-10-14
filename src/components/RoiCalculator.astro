@@ -1,0 +1,231 @@
+---
+// src/components/RoiCalculator.astro
+// Fully reactive, animated Agency Cost vs. Web Harbor Calculator
+// - Input 1: Traditional Agency Quote ($1,500 - $10,000, step $250, default $4,000)
+// - Input 2: Maintenance Hours Needed (0 - 10 hrs/mo, step 1, default 2 hrs/mo @ $100/hr)
+// - Math: trad = quote + (hrs * 100 * 12); webHarbor = 100 + (99 * 12) = 1,288; savings = trad - 1,288
+// - Binds input & change events, updates slider fill tracks, and animates comparison progress bars
+---
+
+<div class="roi-calculator-widget max-w-4xl mx-auto p-8 sm:p-12 rounded-3xl bg-slate-900/85 dark:bg-slate-900/90 border border-slate-700/80 shadow-2xl backdrop-blur-md text-white">
+  <div class="text-center max-w-2xl mx-auto mb-10">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-teal/20 text-accent-teal border border-accent-teal/30 mb-3">
+      <span class="w-2 h-2 rounded-full bg-accent-teal animate-pulse"></span>
+      Interactive ROI Visualizer
+    </div>
+    <h3 class="text-2xl sm:text-3xl font-extrabold font-display tracking-tight text-white">
+      Agency Cost vs. Web Harbor Calculator
+    </h3>
+    <p class="text-slate-400 text-xs sm:text-sm mt-2">
+      Adjust the sliders to compare traditional upfront and maintenance invoices against Web Harbor’s all-inclusive model.
+    </p>
+  </div>
+
+  <div class="space-y-8">
+    <!-- Slider 1: Agency Quote -->
+    <div>
+      <div class="flex justify-between items-center mb-2.5">
+        <label for="agency-quote-slider" class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+          <span>Traditional Agency Quote</span>
+          <span class="text-[11px] text-slate-400 font-normal">(Initial build fee)</span>
+        </label>
+        <span id="agency-quote-display" class="text-accent-teal font-mono font-bold text-lg sm:text-xl">
+          $4,000
+        </span>
+      </div>
+      <input
+        type="range"
+        id="agency-quote-slider"
+        min="1500"
+        max="10000"
+        step="250"
+        value="4000"
+        class="w-full h-2.5 rounded-lg appearance-none cursor-pointer bg-slate-800 accent-accent-blue focus:outline-hidden transition-all duration-150"
+      />
+      <div class="flex justify-between text-[11px] font-mono text-slate-500 mt-1.5">
+        <span>$1,500</span>
+        <span>$5,000</span>
+        <span>$10,000</span>
+      </div>
+    </div>
+
+    <!-- Slider 2: Monthly Maintenance Hours -->
+    <div>
+      <div class="flex justify-between items-center mb-2.5">
+        <label for="maint-hours-slider" class="text-sm font-semibold text-slate-200 flex items-center gap-2">
+          <span>Monthly Maintenance Needed</span>
+          <span class="text-[11px] text-slate-400 font-normal">(Standard agency $100/hr)</span>
+        </label>
+        <span id="maint-hours-display" class="text-accent-teal font-mono font-bold text-lg sm:text-xl">
+          2 hrs/mo ($200)
+        </span>
+      </div>
+      <input
+        type="range"
+        id="maint-hours-slider"
+        min="0"
+        max="10"
+        step="1"
+        value="2"
+        class="w-full h-2.5 rounded-lg appearance-none cursor-pointer bg-slate-800 accent-accent-teal focus:outline-hidden transition-all duration-150"
+      />
+      <div class="flex justify-between text-[11px] font-mono text-slate-500 mt-1.5">
+        <span>0 hrs/mo ($0)</span>
+        <span>5 hrs/mo ($500)</span>
+        <span>10 hrs/mo ($1,000)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Cards Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 pt-8 border-t border-slate-800">
+    <!-- Traditional Agency Cost Card -->
+    <div class="p-6 rounded-2xl bg-slate-950/70 border border-slate-800 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs uppercase font-bold text-red-400 tracking-wider">Traditional Agency</span>
+          <span class="text-[10px] px-2 py-0.5 rounded bg-red-950/80 text-red-300 border border-red-800/60 font-mono">1st Year</span>
+        </div>
+        <div id="traditional-total-display" class="text-4xl font-extrabold text-red-400 font-mono my-2 tracking-tight">
+          $6,400
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          <span id="trad-breakdown-text">$4,000 build + $2,400 annual maintenance ($200/mo)</span>
+        </p>
+      </div>
+
+      <!-- Animated Progress Bar -->
+      <div class="w-full bg-slate-800/80 rounded-full h-2.5 overflow-hidden">
+        <div id="traditional-progress-bar" class="bg-red-500 h-2.5 rounded-full transition-all duration-300" style="width: 29.1%;"></div>
+      </div>
+    </div>
+
+    <!-- Web Harbor Solutions Cost Card -->
+    <div class="p-6 rounded-2xl bg-blue-950/40 border border-blue-500/40 flex flex-col justify-between relative overflow-hidden">
+      <div class="absolute -top-10 -right-10 w-28 h-28 bg-accent-blue/15 rounded-full blur-2xl"></div>
+
+      <div>
+        <div class="flex items-center justify-between mb-1 relative z-10">
+          <span class="text-xs uppercase font-bold text-accent-teal tracking-wider">Web Harbor Solutions</span>
+          <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800/60 font-mono">1st Year</span>
+        </div>
+        <div class="text-4xl font-extrabold text-accent-teal font-mono my-2 tracking-tight relative z-10">
+          $1,288
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed mb-4 relative z-10">
+          $100 setup fee ($50 upfront / $50 live) + ($99/mo × 12) flat retainer
+        </p>
+      </div>
+
+      <!-- Animated Progress Bar -->
+      <div class="w-full bg-slate-800/80 rounded-full h-2.5 overflow-hidden relative z-10">
+        <div id="webharbor-progress-bar" class="bg-gradient-to-r from-accent-blue to-accent-teal h-2.5 rounded-full transition-all duration-300" style="width: 5.85%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Savings Banner -->
+  <div class="mt-8 p-5 rounded-2xl bg-gradient-to-r from-accent-blue/20 via-accent-teal/20 to-accent-blue/20 border border-accent-blue/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+    <div class="flex items-center gap-3.5">
+      <div class="w-10 h-10 rounded-xl bg-accent-teal/20 text-accent-teal flex items-center justify-center shrink-0 border border-accent-teal/40">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <div>
+        <span class="text-xs text-slate-300 block uppercase font-bold tracking-wider">Net First Year Savings</span>
+        <span id="savings-display" class="text-xl sm:text-2xl font-extrabold text-white font-mono tracking-tight">
+          Save over $5,112 in Year 1 alone.
+        </span>
+      </div>
+    </div>
+
+    <a
+      href="/contact/"
+      class="px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-accent-blue hover:bg-accent-blue-hover text-white transition shadow-md hover:shadow-glow shrink-0 flex items-center gap-1.5"
+    >
+      <span>Claim $0 Demo</span>
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m9 18 6-6-6-6"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  function setupRoiCalculator() {
+    const quoteSlider = document.getElementById('agency-quote-slider') as HTMLInputElement | null;
+    const quoteDisplay = document.getElementById('agency-quote-display');
+    const hoursSlider = document.getElementById('maint-hours-slider') as HTMLInputElement | null;
+    const hoursDisplay = document.getElementById('maint-hours-display');
+
+    const tradTotalDisplay = document.getElementById('traditional-total-display');
+    const tradBreakdown = document.getElementById('trad-breakdown-text');
+    const tradProgressBar = document.getElementById('traditional-progress-bar');
+    const webharborProgressBar = document.getElementById('webharbor-progress-bar');
+    const savingsDisplay = document.getElementById('savings-display');
+
+    if (!quoteSlider || !hoursSlider || !quoteDisplay || !hoursDisplay || !tradTotalDisplay || !savingsDisplay) {
+      return;
+    }
+
+    // Update fill track gradient for native range inputs
+    function updateSliderTrack(slider: HTMLInputElement, color: string) {
+      const min = parseFloat(slider.min) || 0;
+      const max = parseFloat(slider.max) || 100;
+      const val = parseFloat(slider.value) || 0;
+      const percentage = ((val - min) / (max - min)) * 100;
+      slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #1e293b ${percentage}%, #1e293b 100%)`;
+    }
+
+    function calculate() {
+      if (!quoteSlider || !hoursSlider || !quoteDisplay || !hoursDisplay || !tradTotalDisplay || !savingsDisplay) return;
+
+      const quote = parseInt(quoteSlider.value, 10);
+      const hours = parseInt(hoursSlider.value, 10);
+
+      // Slider fill tracks
+      updateSliderTrack(quoteSlider, '#2563eb');
+      updateSliderTrack(hoursSlider, '#0d9488');
+
+      // Update Slider Label Displays
+      quoteDisplay.textContent = `$${quote.toLocaleString()}`;
+      hoursDisplay.textContent = `${hours} hr${hours === 1 ? '' : 's'}/mo ($${(hours * 100).toLocaleString()})`;
+
+      // Core Live Math Formulas
+      const monthlyMaintCost = hours * 100;
+      const annualMaintCost = monthlyMaintCost * 12;
+      const traditionalFirstYear = quote + annualMaintCost;
+      const webHarborFirstYear = 100 + 99 * 12; // Fixed at $1,288
+      const firstYearSavings = traditionalFirstYear - webHarborFirstYear;
+
+      // Outputs
+      tradTotalDisplay.textContent = `$${traditionalFirstYear.toLocaleString()}`;
+      if (tradBreakdown) {
+        tradBreakdown.textContent = `$${quote.toLocaleString()} build + $${annualMaintCost.toLocaleString()} annual maintenance ($${monthlyMaintCost}/mo)`;
+      }
+
+      // Progress bar widths (max scale = $22,000 representing maximum quote $10,000 + 10hrs * $100 * 12)
+      const maxScale = 22000;
+      const tradWidth = Math.min(100, Math.max(8, (traditionalFirstYear / maxScale) * 100));
+      const webharborWidth = Math.min(100, Math.max(5, (webHarborFirstYear / maxScale) * 100));
+
+      if (tradProgressBar) tradProgressBar.style.width = `${tradWidth.toFixed(1)}%`;
+      if (webharborProgressBar) webharborProgressBar.style.width = `${webharborWidth.toFixed(1)}%`;
+
+      savingsDisplay.textContent = `Save over $${firstYearSavings.toLocaleString()} in Year 1 alone.`;
+    }
+
+    // Bind both 'input' and 'change' events
+    ['input', 'change'].forEach((evt) => {
+      quoteSlider.addEventListener(evt, calculate);
+      hoursSlider.addEventListener(evt, calculate);
+    });
+
+    // Run initial calculation
+    calculate();
+  }
+
+  // Bind on page load and on every Astro View Transition page swap
+  document.addEventListener('astro:page-load', setupRoiCalculator);
+</script>

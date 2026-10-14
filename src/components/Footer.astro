@@ -1,0 +1,94 @@
+---
+// Footer.astro
+// Trust badge: "99.9% Uptime SLA & Edge-Secured"
+// Direct Contact Information & SLA Guarantee
+// Clean brand voice: "We / Our"
+---
+
+<footer class="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800/80 relative z-10">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12">
+      <!-- Col 1: Brand & Philosophy -->
+      <div class="space-y-4">
+        <a href="/" class="flex items-center gap-3 group" aria-label="Web Harbor Solutions Home">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-blue to-accent-teal flex items-center justify-center text-white shadow-md">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="5" r="3"></circle>
+              <line x1="12" y1="22" x2="12" y2="8"></line>
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
+            </svg>
+          </div>
+          <span class="font-display font-extrabold text-white text-lg tracking-tight">Web Harbor</span>
+        </a>
+        <p class="text-slate-400 text-xs leading-relaxed">
+          We build custom, high-converting websites for local service businesses before you pay a dime. Fast, reliable, and zero upfront risk.
+        </p>
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          <span class="bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-md border border-slate-800">
+            99.9% Uptime SLA &amp; Edge-Secured
+          </span>
+          <span class="bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-md border border-slate-800">
+            Cloudflare Edge Hosted
+          </span>
+          <span class="bg-slate-900 text-slate-300 text-[10px] px-2.5 py-1 rounded-md border border-slate-800">
+            100% Free Spec Demo
+          </span>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation Links -->
+      <div>
+        <h3 class="text-white font-semibold text-sm mb-4 font-display">Navigation</h3>
+        <ul class="space-y-2.5 text-xs text-slate-400">
+          <li><a href="/" class="hover:text-white transition">Home</a></li>
+          <li><a href="/how-it-works/" class="hover:text-white transition">How It Works</a></li>
+          <li><a href="/services/" class="hover:text-white transition">Services</a></li>
+          <li><a href="/pricing/" class="hover:text-white transition">Pricing &amp; Plans</a></li>
+          <li><a href="/portfolio/" class="hover:text-white transition">Live Portfolio</a></li>
+          <li><a href="/about/" class="hover:text-white transition">About Us</a></li>
+          <li><a href="/contact/" class="hover:text-white transition">Claim Demo / Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Legal & Compliance Disclosures -->
+      <div>
+        <h3 class="text-white font-semibold text-sm mb-4 font-display">Trust &amp; Legal</h3>
+        <ul class="space-y-2.5 text-xs text-slate-400">
+          <li><a href="/privacy/" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="/terms/" class="hover:text-white transition">Terms of Service &amp; SLA</a></li>
+          <li><a href="/liability/" class="hover:text-white transition">Client Content &amp; Liability</a></li>
+        </ul>
+        <div class="mt-4 p-3 rounded-lg bg-slate-900/80 border border-slate-800/80 text-[11px] text-slate-400 leading-snug">
+          Zero upfront contracts. Built on private staging before any invoice is issued.
+        </div>
+      </div>
+
+      <!-- Col 4: Contact & SLA -->
+      <div>
+        <h3 class="text-white font-semibold text-sm mb-4 font-display">Get In Touch</h3>
+        <div class="space-y-2.5 text-xs text-slate-400">
+          <p>
+            <strong class="text-white block mb-0.5">Direct Email:</strong>
+            <a href="mailto:webharborsolutions@gmail.com" class="text-accent-teal hover:underline">
+              webharborsolutions@gmail.com
+            </a>
+          </p>
+          <p>
+            <strong class="text-white block mb-0.5">SLA Response:</strong>
+            Within 12 business hours
+          </p>
+          <p>
+            <strong class="text-white block mb-0.5">Turnaround Target:</strong>
+            Working demo link within 48 hours
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+      <p>&copy; {new Date().getFullYear()} Web Harbor Solutions. All rights reserved.</p>
+      <p>Serving local service businesses across the US, UK, Canada, and Australia.</p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,263 @@
+---
+// src/pages/contact.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Us / Claim Your Demo | Web Harbor Solutions"
+  description="Request your free custom website demo with zero upfront obligation. We build first, you decide."
+  canonical="https://webharborsolutions.com/contact/"
+>
+  <!-- Header -->
+  <section class="pt-16 pb-12 md:pt-24 md:pb-16 text-center relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-6 backdrop-blur-md">
+        <span>Zero-Risk Guarantee</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-primary-dark dark:text-slate-50 font-display tracking-tight mb-6">
+        Claim Your Free Working Demo Website.
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        Tell us about your business. Our team will review your local market and build a live working prototype on our private test servers within 48 hours.
+      </p>
+    </div>
+  </section>
+
+  <!-- Form & Contact Details Section -->
+  <section class="py-12 md:py-20 relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <!-- Demo Request Form (With Glassmorphic Surface) -->
+        <div class="lg:col-span-7 bg-white/80 dark:bg-slate-900/80 p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl backdrop-blur-md">
+          <h2 class="text-2xl font-bold text-primary-dark dark:text-slate-100 font-display mb-2">
+            Request Your Free Prototype
+          </h2>
+          <p class="text-slate-600 dark:text-slate-400 text-xs mb-8">
+            Fields marked with an asterisk (<span class="text-red-500">*</span>) are required so we can locate your business data.
+          </p>
+
+          <form id="demo-request-form" class="space-y-5">
+            <!-- Business Name -->
+            <div>
+              <label for="businessName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Business Name <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="businessName"
+                name="businessName"
+                required
+                placeholder="e.g. Apex Plumbing & Heating"
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+              />
+            </div>
+
+            <!-- Business Category -->
+            <div>
+              <label for="businessTrade" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                Business Trade / Industry <span class="text-red-500">*</span>
+              </label>
+              <select
+                id="businessTrade"
+                name="businessTrade"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+              >
+                <option value="" disabled selected>Select your industry</option>
+                <option value="Plumbing">Plumbing &amp; Drains</option>
+                <option value="HVAC">Heating, Ventilation &amp; AC</option>
+                <option value="Electrical">Electrical Contractor</option>
+                <option value="Roofing">Roofing &amp; Contracting</option>
+                <option value="Landscaping">Landscaping &amp; Tree Care</option>
+                <option value="Dental">Dental &amp; Healthcare</option>
+                <option value="Restaurant">Restaurant, Cafe &amp; Bakery</option>
+                <option value="Auto">Auto Repair &amp; Detailing</option>
+                <option value="Other">Other Local Service Business</option>
+              </select>
+            </div>
+
+            <!-- City & State -->
+            <div>
+              <label for="cityState" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                City &amp; State / Province <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="cityState"
+                name="cityState"
+                required
+                placeholder="e.g. Austin, TX or Toronto, ON"
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+              />
+            </div>
+
+            <!-- Contact Name & Email -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="userName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Your Name <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  required
+                  placeholder="e.g. Mike Henderson"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+                />
+              </div>
+
+              <div>
+                <label for="userEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Email Address <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="userEmail"
+                  name="userEmail"
+                  required
+                  placeholder="mike@example.com"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+                />
+              </div>
+            </div>
+
+            <!-- Phone & Website -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="userPhone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Phone (Optional)
+                </label>
+                <input
+                  type="tel"
+                  id="userPhone"
+                  name="userPhone"
+                  placeholder="(555) 000-0000"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+                />
+              </div>
+
+              <div>
+                <label for="existingSite" class="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1.5">
+                  Existing Website (If Any)
+                </label>
+                <input
+                  type="text"
+                  id="existingSite"
+                  name="existingSite"
+                  placeholder="www.yourcurrentsite.com"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950/70 text-slate-900 dark:text-slate-100 text-sm focus:outline-hidden focus:ring-2 focus:ring-accent-blue transition"
+                />
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-2">
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full py-4 rounded-xl font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg hover:shadow-glow transition duration-200 flex items-center justify-center gap-2 group cursor-pointer"
+              >
+                <span>Build My Free Custom Demo</span>
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m9 18 6-6-6-6"></path>
+                </svg>
+              </button>
+              <p class="text-center text-xs text-slate-500 dark:text-slate-400 mt-3">
+                100% Free. No credit card required. Prototype ready within 48 business hours.
+              </p>
+            </div>
+          </form>
+
+          <!-- Success Message Feedback State -->
+          <div id="form-success-banner" class="hidden mt-6 p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-500/30 text-emerald-900 dark:text-emerald-200 text-center">
+            <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto mb-3 shadow-sm">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold font-display mb-1">Demo Request Received!</h3>
+            <p class="text-xs text-emerald-800 dark:text-emerald-300 max-w-md mx-auto leading-relaxed">
+              Our engineering team has received your business details. We will research your local market and email your private prototype demo link within 48 hours.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Channels & Hours (With 3D Tilt Cards) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
+            <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 font-display mb-6">Direct Team Channels</h3>
+
+            <div class="space-y-6 text-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-accent-blue dark:text-blue-400 flex items-center justify-center shrink-0 shadow-xs">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <strong class="block text-primary-dark dark:text-slate-100 mb-0.5">Email Support</strong>
+                  <a href="mailto:webharborsolutions@gmail.com" class="text-accent-teal hover:underline text-xs">
+                    webharborsolutions@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/60 text-accent-teal dark:text-teal-400 flex items-center justify-center shrink-0 shadow-xs">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </div>
+                <div>
+                  <strong class="block text-primary-dark dark:text-slate-100 mb-0.5">Operating Hours</strong>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Monday – Friday: 9:00 AM – 6:00 PM EST</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 shadow-xs">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div>
+                  <strong class="block text-primary-dark dark:text-slate-100 mb-0.5">12-Hour SLA Guarantee</strong>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Every message receives a direct technical reply within 12 business hours.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div data-tilt class="p-6 rounded-2xl bg-slate-900/90 text-white border border-slate-800 backdrop-blur-md shadow-card transition-all duration-300">
+            <h4 class="font-bold text-sm mb-2 text-accent-teal font-display">What Happens Next?</h4>
+            <ol class="space-y-2 text-xs text-slate-300 list-decimal list-inside leading-relaxed">
+              <li>We check your Google Reviews and service areas.</li>
+              <li>We build a tailored, mobile-optimized live demo.</li>
+              <li>We send you a private link within 48 hours.</li>
+              <li>You inspect it. If you love it, we launch it.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupContactForm() {
+    const form = document.getElementById('demo-request-form') as HTMLFormElement | null;
+    const banner = document.getElementById('form-success-banner');
+    if (!form || !banner) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('#submit-btn') as HTMLButtonElement | null;
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Submitting Request...';
+      }
+
+      setTimeout(() => {
+        form.classList.add('hidden');
+        banner.classList.remove('hidden');
+      }, 700);
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupContactForm);
+</script>
