@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://webharborsolutions.com/sitemap.xml
+Sitemap: https://webharborsolutions.com/sitemap-index.xml

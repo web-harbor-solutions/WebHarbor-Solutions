@@ -1,445 +1,219 @@
 ---
 // src/components/Canvas3D.astro
-// Full-viewport persistent Three.js background with transition:persist="webgl-canvas"
-// 1. Sleek geometric wireframe core (Icosahedron & nested Torus Knot) + global edge node spatial wave
-// 2. GSAP ScrollTrigger scrubbed rotation, perspective shifts, and dispersion morphing
-// 3. Smooth Light/Dark mode transitions on theme-change
-// 4. Mobile & low-concurrency optimization, deferred requestIdleCallback init, RAF pause on tab inactivity
+// Persistent full-viewport Three.js background canvas
 ---
 
 <div
-  id="webgl-canvas-container"
+  id="webgl-container"
   transition:persist="webgl-canvas"
-  class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+  class="fixed inset-0 -z-10 pointer-events-none overflow-hidden bg-[#05070e]"
   aria-hidden="true"
->
-  <canvas id="webgl-canvas-element" class="w-full h-full block"></canvas>
-</div>
+></div>
 
 <script>
   import * as THREE from 'three';
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  // Global state attached to window to survive page transitions with transition:persist
-  interface WebGLState {
-    initialized: boolean;
-    renderer: THREE.WebGLRenderer | null;
-    scene: THREE.Scene | null;
-    camera: THREE.PerspectiveCamera | null;
-    coreGroup: THREE.Group | null;
-    innerMesh: THREE.Mesh | null;
-    outerMesh: THREE.Mesh | null;
-    particles: THREE.Points | null;
-    lines: THREE.LineSegments | null;
-    ambientLight: THREE.AmbientLight | null;
-    dirLight1: THREE.DirectionalLight | null;
-    dirLight2: THREE.DirectionalLight | null;
-    rafId: number | null;
-    isMobile: boolean;
-    mouseX: number;
-    mouseY: number;
-    targetMouseX: number;
-    targetMouseY: number;
-    scrollTriggerInstance: ScrollTrigger | null;
-    time: number;
-  }
 
   declare global {
     interface Window {
-      __webglState?: WebGLState;
+      __webHarbor3DInitialized?: boolean;
     }
   }
 
-  function getOrInitState(): WebGLState {
-    if (!window.__webglState) {
-      window.__webglState = {
-        initialized: false,
-        renderer: null,
-        scene: null,
-        camera: null,
-        coreGroup: null,
-        innerMesh: null,
-        outerMesh: null,
-        particles: null,
-        lines: null,
-        ambientLight: null,
-        dirLight1: null,
-        dirLight2: null,
-        rafId: null,
-        isMobile: false,
-        mouseX: 0,
-        mouseY: 0,
-        targetMouseX: 0,
-        targetMouseY: 0,
-        scrollTriggerInstance: null,
-        time: 0,
-      };
-    }
-    return window.__webglState;
-  }
+  function initThreeScene() {
+    if (window.__webHarbor3DInitialized) return;
 
-  function initWebGL() {
-    const state = getOrInitState();
-    const canvas = document.getElementById('webgl-canvas-element') as HTMLCanvasElement;
-    if (!canvas) return;
+    const container = document.getElementById('webgl-container');
+    if (!container) return;
 
-    // If already running with an active canvas context, just rebind ScrollTrigger
-    if (state.initialized && state.renderer && state.scene && state.camera) {
-      bindScrollTrigger(state);
-      return;
-    }
+    window.__webHarbor3DInitialized = true;
 
     const isMobile =
       window.innerWidth < 768 ||
-      (typeof navigator !== 'undefined' && navigator.hardwareConcurrency <= 4);
-    state.isMobile = isMobile;
-
-    const isDark = document.documentElement.classList.contains('dark');
+      (typeof navigator !== 'undefined' &&
+        !!navigator.hardwareConcurrency &&
+        navigator.hardwareConcurrency <= 4);
 
     // 1. Scene & Fog
     const scene = new THREE.Scene();
-    state.scene = scene;
-    const initialFogColor = isDark ? 0x060913 : 0xf8fafc;
-    scene.fog = new THREE.FogExp2(initialFogColor, isMobile ? 0.0018 : 0.0014);
+    scene.fog = new THREE.FogExp2(0x05070e, 0.032);
 
     // 2. Camera
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    const camera = new THREE.PerspectiveCamera(50, width / height, 1, 2000);
-    camera.position.set(0, 40, isMobile ? 380 : 320);
-    state.camera = camera;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
+    camera.position.set(0, 0, 8);
 
-    // 3. WebGL Renderer
-    try {
-      const renderer = new THREE.WebGLRenderer({
-        canvas,
-        alpha: true,
-        antialias: !isMobile,
-        powerPreference: 'high-performance',
-      });
-      renderer.setSize(width, height);
-      renderer.setPixelRatio(isMobile ? Math.min(window.devicePixelRatio, 1.25) : Math.min(window.devicePixelRatio, 2));
-      state.renderer = renderer;
-    } catch (e) {
-      console.warn('WebGL initialization skipped:', e);
-      return;
-    }
+    // 3. Renderer
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: !isMobile,
+      powerPreference: 'high-performance',
+    });
+    renderer.setSize(width, height);
+    renderer.setClearColor(0x05070e, 1);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.2 : 1.75));
+    container.appendChild(renderer.domElement);
 
-    // 4. Lights
-    const ambientLight = new THREE.AmbientLight(
-      isDark ? 0x1e1b4b : 0xffffff,
-      isDark ? 1.4 : 1.8
-    );
-    scene.add(ambientLight);
-    state.ambientLight = ambientLight;
-
-    const dirLight1 = new THREE.DirectionalLight(isDark ? 0x38bdf8 : 0x2563eb, isDark ? 2.2 : 1.5);
-    dirLight1.position.set(100, 200, 150);
-    scene.add(dirLight1);
-    state.dirLight1 = dirLight1;
-
-    const dirLight2 = new THREE.DirectionalLight(isDark ? 0x6366f1 : 0x0d9488, isDark ? 1.8 : 1.2);
-    dirLight2.position.set(-150, -100, -100);
-    scene.add(dirLight2);
-    state.dirLight2 = dirLight2;
-
-    // 5. Core Geometry (Icosahedron & Nested Torus Knot)
+    // 4. Geometry Group (coreGroup)
     const coreGroup = new THREE.Group();
-    coreGroup.position.set(isMobile ? 0 : 70, 0, 0);
+    coreGroup.position.set(isMobile ? 0 : 1.8, 0, 0);
     scene.add(coreGroup);
-    state.coreGroup = coreGroup;
 
-    // Outer geometric icosahedron wireframe
-    const outerGeo = new THREE.IcosahedronGeometry(isMobile ? 55 : 75, isMobile ? 1 : 2);
-    const outerMat = new THREE.MeshStandardMaterial({
-      color: isDark ? 0x38bdf8 : 0x2563eb,
-      emissive: isDark ? 0x0d9488 : 0x1d4ed8,
-      emissiveIntensity: isDark ? 0.45 : 0.2,
+    // Outer Wireframe Mesh (Icosahedron)
+    const outerGeo = new THREE.IcosahedronGeometry(4.2, isMobile ? 1 : 2);
+    const outerMat = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.75 : 0.55,
-      roughness: 0.3,
-      metalness: 0.8,
+      opacity: 0.16,
+      blending: THREE.AdditiveBlending,
     });
     const outerMesh = new THREE.Mesh(outerGeo, outerMat);
     coreGroup.add(outerMesh);
-    state.outerMesh = outerMesh;
 
-    // Inner Torus Knot core
+    // Inner Morphing Torus Knot Core
     const innerGeo = new THREE.TorusKnotGeometry(
-      isMobile ? 26 : 38,
-      isMobile ? 7 : 10,
-      isMobile ? 48 : 80,
-      isMobile ? 8 : 14
+      1.8,
+      0.45,
+      isMobile ? 64 : 100,
+      isMobile ? 12 : 16
     );
-    const innerMat = new THREE.MeshStandardMaterial({
-      color: isDark ? 0x6366f1 : 0x0d9488,
-      emissive: isDark ? 0x38bdf8 : 0x0f766e,
-      emissiveIntensity: isDark ? 0.5 : 0.25,
+    const innerMat = new THREE.MeshBasicMaterial({
+      color: 0x6366f1,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.65 : 0.45,
+      opacity: 0.12,
+      blending: THREE.AdditiveBlending,
     });
     const innerMesh = new THREE.Mesh(innerGeo, innerMat);
     coreGroup.add(innerMesh);
-    state.innerMesh = innerMesh;
 
-    // 6. Global Edge Node Spatial Particle Wave Grid
-    const amountX = isMobile ? 22 : 45;
-    const amountY = isMobile ? 22 : 45;
-    const separation = isMobile ? 45 : 32;
-    const numParticles = amountX * amountY;
+    // 5. Spatial Edge Particle Field (particleSystem)
+    const particleCount = isMobile ? 220 : 800;
+    const particlePositions = new Float32Array(particleCount * 3);
 
-    const positions = new Float32Array(numParticles * 3);
-    let pIdx = 0;
-    for (let ix = 0; ix < amountX; ix++) {
-      for (let iy = 0; iy < amountY; iy++) {
-        positions[pIdx] = ix * separation - (amountX * separation) / 2;
-        positions[pIdx + 1] = -100; // base y below core
-        positions[pIdx + 2] = iy * separation - (amountY * separation) / 2;
-        pIdx += 3;
-      }
+    for (let i = 0; i < particleCount; i++) {
+      const idx = i * 3;
+      const radius = 5 + Math.random() * 12;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      particlePositions[idx] = radius * Math.sin(phi) * Math.cos(theta);
+      particlePositions[idx + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      particlePositions[idx + 2] = radius * Math.cos(phi);
     }
 
     const particleGeo = new THREE.BufferGeometry();
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-    // Particle sprite
-    const pCanvas = document.createElement('canvas');
-    pCanvas.width = 16;
-    pCanvas.height = 16;
-    const pCtx = pCanvas.getContext('2d');
-    if (pCtx) {
-      const grad = pCtx.createRadialGradient(8, 8, 0, 8, 8, 8);
-      grad.addColorStop(0, 'rgba(255,255,255,1)');
-      grad.addColorStop(0.5, 'rgba(56,189,248,0.7)');
-      grad.addColorStop(1, 'rgba(56,189,248,0)');
-      pCtx.fillStyle = grad;
-      pCtx.fillRect(0, 0, 16, 16);
-    }
-    const pTexture = new THREE.CanvasTexture(pCanvas);
+    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
 
     const particleMat = new THREE.PointsMaterial({
-      color: isDark ? 0x38bdf8 : 0x2563eb,
-      size: isMobile ? 5 : 4,
-      map: pTexture,
+      color: 0x38bdf8,
+      size: 0.045,
       transparent: true,
-      opacity: isDark ? 0.7 : 0.5,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    const particles = new THREE.Points(particleGeo, particleMat);
-    scene.add(particles);
-    state.particles = particles;
-
-    // Wave connection lines
-    const lineIndices: number[] = [];
-    for (let ix = 0; ix < amountX; ix++) {
-      for (let iy = 0; iy < amountY; iy++) {
-        const idx = ix * amountY + iy;
-        if (ix < amountX - 1) lineIndices.push(idx, (ix + 1) * amountY + iy);
-        if (iy < amountY - 1) lineIndices.push(idx, idx + 1);
-      }
-    }
-
-    const lineGeo = new THREE.BufferGeometry();
-    lineGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    lineGeo.setIndex(lineIndices);
-
-    const lineMat = new THREE.LineBasicMaterial({
-      color: isDark ? 0x1e3a8a : 0x93c5fd,
-      transparent: true,
-      opacity: isDark ? 0.25 : 0.18,
+      opacity: 0.55,
       blending: THREE.AdditiveBlending,
     });
-    const lines = new THREE.LineSegments(lineGeo, lineMat);
-    scene.add(lines);
-    state.lines = lines;
+    const particleSystem = new THREE.Points(particleGeo, particleMat);
+    scene.add(particleSystem);
 
-    // 7. Mouse Parallax Listener
-    const onMouseMove = (e: MouseEvent) => {
-      state.targetMouseX = (e.clientX - window.innerWidth / 2) * 0.08;
-      state.targetMouseY = (e.clientY - window.innerHeight / 2) * 0.08;
-    };
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    // Mouse Tracking
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+    let currentMouseX = 0;
+    let currentMouseY = 0;
 
-    // 8. Theme Change Handler (Smooth Tweening)
-    const onThemeChange = (e: any) => {
-      const dark = e.detail?.isDark ?? document.documentElement.classList.contains('dark');
-      if (!scene || !state.ambientLight || !state.dirLight1 || !state.dirLight2) return;
-
-      const targetFog = new THREE.Color(dark ? 0x060913 : 0xf8fafc);
-      const targetAmbient = new THREE.Color(dark ? 0x1e1b4b : 0xffffff);
-      const targetDir1 = new THREE.Color(dark ? 0x38bdf8 : 0x2563eb);
-      const targetDir2 = new THREE.Color(dark ? 0x6366f1 : 0x0d9488);
-      const targetOuterColor = new THREE.Color(dark ? 0x38bdf8 : 0x2563eb);
-      const targetInnerColor = new THREE.Color(dark ? 0x6366f1 : 0x0d9488);
-
-      gsap.to(scene.fog ? scene.fog : {}, {
-        duration: 0.8,
-        ease: 'power2.out',
-        onUpdate: () => {
-          if (scene.fog) (scene.fog as THREE.FogExp2).color.lerp(targetFog, 0.1);
+    if (!isMobile) {
+      window.addEventListener(
+        'mousemove',
+        (e) => {
+          targetMouseX = (e.clientX / window.innerWidth) * 2 - 1;
+          targetMouseY = -(e.clientY / window.innerHeight) * 2 + 1;
         },
-      });
+        { passive: true }
+      );
+    }
 
-      state.ambientLight.color.lerp(targetAmbient, 0.8);
-      state.ambientLight.intensity = dark ? 1.4 : 1.8;
-
-      state.dirLight1.color.lerp(targetDir1, 0.8);
-      state.dirLight2.color.lerp(targetDir2, 0.8);
-
-      if (state.outerMesh && state.outerMesh.material instanceof THREE.MeshStandardMaterial) {
-        state.outerMesh.material.color.lerp(targetOuterColor, 0.8);
-        state.outerMesh.material.emissive.set(dark ? 0x0d9488 : 0x1d4ed8);
-        state.outerMesh.material.opacity = dark ? 0.75 : 0.55;
-      }
-
-      if (state.innerMesh && state.innerMesh.material instanceof THREE.MeshStandardMaterial) {
-        state.innerMesh.material.color.lerp(targetInnerColor, 0.8);
-        state.innerMesh.material.emissive.set(dark ? 0x38bdf8 : 0x0f766e);
-        state.innerMesh.material.opacity = dark ? 0.65 : 0.45;
-      }
-
-      if (state.particles && state.particles.material instanceof THREE.PointsMaterial) {
-        state.particles.material.color.set(dark ? 0x38bdf8 : 0x2563eb);
-        state.particles.material.opacity = dark ? 0.7 : 0.5;
-      }
-
-      if (state.lines && state.lines.material instanceof THREE.LineBasicMaterial) {
-        state.lines.material.color.set(dark ? 0x1e3a8a : 0x93c5fd);
-        state.lines.material.opacity = dark ? 0.25 : 0.18;
-      }
+    // Window Resize Handler
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
     };
-    window.addEventListener('theme-change', onThemeChange);
+    window.addEventListener('resize', handleResize);
 
-    // 9. Resize Handler
-    const onResize = () => {
-      if (!state.camera || !state.renderer) return;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      state.camera.aspect = w / h;
-      state.camera.updateProjectionMatrix();
-      state.renderer.setSize(w, h);
-      ScrollTrigger.refresh();
+    // Scroll Progress Calculation
+    let targetScrollProgress = 0;
+    let currentScrollProgress = 0;
+
+    const updateScrollTarget = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      targetScrollProgress = totalScroll > 0 ? window.scrollY / totalScroll : 0;
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener('scroll', updateScrollTarget, { passive: true });
+    updateScrollTarget();
 
-    // 10. ScrollTrigger Binding
-    bindScrollTrigger(state);
+    // 6. Animation Loop with Lerp & Visibility Throttling
+    let clock = new THREE.Clock();
 
-    // 11. Render Loop with Inactive Tab Pausing
     function animate() {
-      if (!state.renderer || !state.scene || !state.camera) return;
-
       if (!document.hidden) {
-        state.time += 0.02;
+        const elapsedTime = clock.getElapsedTime();
 
-        // Smooth cursor interpolation
-        state.mouseX += (state.targetMouseX - state.mouseX) * 0.05;
-        state.mouseY += (state.targetMouseY - state.mouseY) * 0.05;
+        // Smooth scroll interpolation
+        currentScrollProgress += (targetScrollProgress - currentScrollProgress) * 0.08;
 
-        // Autonomous core rotation
-        if (state.coreGroup) {
-          state.coreGroup.rotation.y += 0.004;
-          state.coreGroup.rotation.x = state.mouseY * 0.02;
-          state.coreGroup.rotation.z = state.mouseX * 0.02;
+        // Smooth mouse interpolation
+        currentMouseX += (targetMouseX - currentMouseX) * 0.05;
+        currentMouseY += (targetMouseY - currentMouseY) * 0.05;
+
+        // Continuous Rotation + Scroll Progress
+        coreGroup.rotation.y = elapsedTime * 0.18 + currentScrollProgress * Math.PI * 2;
+        coreGroup.rotation.x = Math.sin(elapsedTime * 0.25) * 0.2 + currentScrollProgress * 0.5;
+
+        innerMesh.rotation.x = elapsedTime * 0.35;
+        innerMesh.rotation.y = elapsedTime * 0.25;
+
+        // Subtle desktop tilt toward cursor
+        if (!isMobile) {
+          coreGroup.rotation.y += currentMouseX * 0.25;
+          coreGroup.rotation.x += -currentMouseY * 0.25;
         }
 
-        if (state.innerMesh) {
-          state.innerMesh.rotation.x += 0.008;
-          state.innerMesh.rotation.z -= 0.006;
-        }
+        // Camera Depth Morph: shifts smoothly between 9 and 6.5
+        camera.position.z = 8.5 - currentScrollProgress * 2.0;
 
-        // Undulating spatial particle wave
-        if (state.particles && state.particles.geometry) {
-          const posAttr = state.particles.geometry.attributes.position as THREE.BufferAttribute;
-          const posArr = posAttr.array as Float32Array;
+        // Morph Core Group vertical drift and scale
+        coreGroup.position.y = -currentScrollProgress * 2.2;
+        const scaleFactor = 1.0 - currentScrollProgress * 0.15;
+        coreGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
 
-          let idx = 0;
-          for (let ix = 0; ix < amountX; ix++) {
-            for (let iy = 0; iy < amountY; iy++) {
-              posArr[idx + 1] =
-                Math.sin((ix + state.time * 2) * 0.25) * 16 +
-                Math.sin((iy + state.time * 2) * 0.35) * 16 -
-                90;
-              idx += 3;
-            }
-          }
-          posAttr.needsUpdate = true;
+        // Particle System Slow Orbital Drift
+        particleSystem.rotation.y = elapsedTime * 0.04;
+        particleSystem.rotation.x = elapsedTime * 0.02;
 
-          if (state.lines && state.lines.geometry) {
-            const linePosAttr = state.lines.geometry.attributes.position as THREE.BufferAttribute;
-            linePosAttr.needsUpdate = true;
-          }
-        }
-
-        state.renderer.render(state.scene, state.camera);
+        renderer.render(scene, camera);
       }
 
-      state.rafId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     }
 
-    animate();
-    state.initialized = true;
+    requestAnimationFrame(animate);
   }
 
-  // Bind or rebind GSAP ScrollTrigger across full page height
-  function bindScrollTrigger(state: WebGLState) {
-    if (state.scrollTriggerInstance) {
-      state.scrollTriggerInstance.kill();
-      state.scrollTriggerInstance = null;
-    }
-
-    if (!state.coreGroup || !state.camera) return;
-
-    state.scrollTriggerInstance = ScrollTrigger.create({
-      trigger: document.body,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.2,
-      onUpdate: (self) => {
-        const p = self.progress; // 0 to 1
-
-        if (state.coreGroup) {
-          // Rotates fully and shifts perspective
-          state.coreGroup.rotation.y = p * Math.PI * 4;
-          state.coreGroup.rotation.x = Math.sin(p * Math.PI * 2) * 0.5;
-
-          // Subtle position drift across page
-          state.coreGroup.position.y = (p - 0.5) * 80;
-          state.coreGroup.position.x = (state.isMobile ? 0 : 70) + Math.sin(p * Math.PI * 3) * 40;
-
-          // Morph scale
-          const s = 1 + Math.sin(p * Math.PI) * 0.35;
-          state.coreGroup.scale.set(s, s, s);
-        }
-
-        if (state.camera) {
-          state.camera.position.z = (state.isMobile ? 380 : 320) + p * 60;
-        }
-      },
-    });
-
-    ScrollTrigger.refresh();
-  }
-
-  // Deferred initialization using requestIdleCallback or next paint
-  function scheduleWebGLInit() {
+  function scheduleInit() {
     if (typeof window === 'undefined') return;
+    if (window.__webHarbor3DInitialized) return;
 
     if ('requestIdleCallback' in window) {
-      (window as any).requestIdleCallback(() => initWebGL(), { timeout: 1200 });
+      (window as any).requestIdleCallback(() => initThreeScene(), { timeout: 120 });
     } else {
-      setTimeout(() => initWebGL(), 150);
+      setTimeout(() => initThreeScene(), 120);
     }
   }
 
-  // Astro Lifecycle
   document.addEventListener('astro:page-load', () => {
-    scheduleWebGLInit();
+    scheduleInit();
   });
 </script>

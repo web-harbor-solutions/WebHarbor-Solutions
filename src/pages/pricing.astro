@@ -1,237 +1,216 @@
 ---
 // src/pages/pricing.astro
+// Pricing page strictly adhering to Section 7.6 specifications
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RoiCalculator from '../components/RoiCalculator.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import { PRICING_FAQS } from '../data/faqs';
 
-const industries = [
-  { id: 'plumbing', name: 'Plumbing', value: 350, metric: 'Average repair / drain job: $350' },
-  { id: 'dental', name: 'Dental', value: 600, metric: 'Average new patient value: $600' },
-  { id: 'landscaping', name: 'Landscaping', value: 250, metric: 'Average maintenance client: $250/mo' },
-  { id: 'roofing', name: 'Roofing & Contracting', value: 2500, metric: 'Average replacement project: $2,500' },
-  { id: 'auto', name: 'Auto Repair', value: 300, metric: 'Average service invoice: $300' },
-];
-
-const faqs = [
-  {
-    q: 'Why is there a $100 setup fee?',
-    a: 'The $100 setup fee covers your domain registration, DNS records, and initial Cloudflare routing configuration. We split it 50/50: $50 before final production, and $50 only after you verify the site is live and performing on your domain.',
-  },
-  {
-    q: 'What happens after the 6-month minimum agreement?',
-    a: 'You transition into a simple month-to-month agreement at the exact same $99/mo rate. You may cancel at any time with a 30-day written notice via email. Zero cancellation penalties.',
-  },
-  {
-    q: 'Do I own my custom domain?',
-    a: 'Yes, 100%. The domain is purchased on your behalf. If you ever leave Web Harbor Solutions, we release the domain or transfer the registrar authorization code to your account at zero cost.',
-  },
-  {
-    q: 'What counts as a monthly content edit?',
-    a: 'A monthly update covers text additions, swapping seasonal service promotions, changing phone numbers or addresses, uploading new project photos, or adding team members. Unused edits do not roll over to subsequent months.',
-  },
-  {
-    q: 'Can I keep my existing domain name?',
-    a: 'Yes. If you already own your domain (through GoDaddy, Namecheap, Google Domains, etc.), we simply provide the DNS nameserver records to connect your domain to our Cloudflare edge network.',
-  },
-];
+const seoTitle = 'Pricing & Plans | $0 Upfront Demo + $100 Setup + $99/mo | Web Harbor Solutions';
+const seoDesc = 'Radical pricing transparency. $0 upfront prototype, $100 one-time setup upon approval, and $99/month for all-inclusive edge hosting, domain, and 3 monthly edits.';
 ---
 
-<BaseLayout
-  title="Transparent Pricing — $99/Month Flat | Web Harbor Solutions"
-  description="No hidden setup fees, no $5,000 invoices. A $100 setup fee and $99/month covers your custom site, hosting, domain, and monthly edits."
-  canonical="https://webharborsolutions.com/pricing/"
->
-  <!-- Header -->
-  <section class="pt-16 pb-12 md:pt-24 md:pb-16 text-center relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-6 backdrop-blur-md">
-        <span>Transparent &amp; Predictable</span>
+<BaseLayout title={seoTitle} description={seoDesc} faqs={PRICING_FAQS}>
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto space-y-6" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>RADICAL PRICING TRANSPARENCY</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]">
+          One Simple Plan. Zero Upfront Risk. Zero Surprise Invoices.
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+          Stop paying $5,000 upfront and $150/hour for basic maintenance. Test-drive your custom website live before paying a cent.
+        </p>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-primary-dark dark:text-slate-50 font-display tracking-tight mb-6">
-        One Flat Plan. Zero Hidden Fees.
-      </h1>
-      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-        No $5,000 surprises, no hosting renewal price gouging, and no charges for basic text edits.
-      </p>
     </div>
   </section>
 
-  <!-- Main Pricing Card Section (With 3D Tilt) -->
-  <section class="py-12 relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div
-        data-tilt
-        class="rounded-3xl bg-white/80 dark:bg-slate-900/80 border-2 border-accent-blue/40 dark:border-accent-blue/50 shadow-2xl backdrop-blur-md overflow-hidden p-8 sm:p-12 relative transition-all duration-300"
-      >
-        <div class="absolute top-0 right-0 bg-accent-blue text-white text-[11px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-bl-xl shadow-xs">
-          The Harbor Complete Plan
-        </div>
+  <!-- Primary Pricing Architecture (2-Column Featured Layout) -->
+  <section class="relative py-12 lg:py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <!-- Card 1: Step 1 - The Live Spec Prototype ($0 Upfront) -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-3xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-8 sm:p-10 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/[0.04] text-slate-300 border border-white/10 text-xs font-mono font-bold">
+              STEP 1: THE EVALUATION
+            </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-accent-blue dark:text-blue-400">All-Inclusive Retainer</span>
-            <div class="flex items-baseline gap-2 mt-2 mb-4">
-              <span class="text-5xl font-extrabold text-primary-dark dark:text-slate-50 font-display">$99</span>
-              <span class="text-slate-500 dark:text-slate-400 text-base font-semibold">/ month</span>
+            <div>
+              <div class="flex items-baseline gap-2">
+                <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono tabular-nums">$0</span>
+                <span class="text-slate-400 text-sm font-mono">Today</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mt-2">The Live Spec Prototype</h3>
+              <p class="text-sm text-slate-400 mt-1">
+                See your custom website live on a private staging URL before committing.
+              </p>
             </div>
-            <div class="p-4 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 space-y-1 mb-6">
-              <p><strong class="text-primary-dark dark:text-slate-100">$100 Setup Fee:</strong> Split 50% ($50) before production, 50% ($50) only after your site is live.</p>
-              <p><strong class="text-primary-dark dark:text-slate-100">Commitment:</strong> 6-Month minimum term, month-to-month thereafter.</p>
-            </div>
+
+            <!-- Bullet Checklist -->
+            <ul class="space-y-3 pt-4 border-t border-white/[0.08] text-sm text-slate-300">
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Custom Homepage &amp; Core Layout Preview</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Mobile &amp; Desktop Interactive Link</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>PageSpeed &amp; Conversion Blueprint</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>100% Walk-Away Guarantee if not thrilled</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-auto pt-8">
             <a
-              href="/contact/"
-              class="w-full inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg hover:shadow-glow transition duration-200 gap-2"
+              href="/contact?plan=free-spec-demo"
+              class="magnetic-btn w-full py-4 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all text-center"
             >
-              <span>Claim Free Spec Demo</span>
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg>
+              <span>Request Your $0 Spec Demo →</span>
             </a>
-            <p class="text-center text-[11px] text-slate-400 mt-2">Zero payment required today. See your site first.</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Step 2 - All-Inclusive Launch & Managed Plan ($100 Setup + $99/mo) -->
+        <div class="spotlight-card relative flex flex-col justify-between h-full rounded-3xl bg-slate-900/75 backdrop-blur-xl border-2 border-sky-400/40 p-8 sm:p-10 shadow-2xl transition-all duration-300 hover:border-sky-400" data-reveal>
+          <!-- Most Popular Badge -->
+          <div class="absolute -top-3.5 right-6 px-3.5 py-1 rounded-full bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 text-xs font-mono font-bold uppercase tracking-wider shadow-md">
+            MOST POPULAR
           </div>
 
-          <div class="space-y-3.5 border-t md:border-t-0 md:border-l border-slate-200 dark:border-slate-800 pt-8 md:pt-0 md:pl-10">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">What Is Included:</h3>
-            
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Custom-coded, mobile-first website</span>
+          <div class="space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-400/20 text-xs font-mono font-bold">
+              STEP 2: FULL LAUNCH &amp; ONGOING CARE
             </div>
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Free custom domain (.com, .net, .org)</span>
+
+            <div>
+              <div class="flex items-baseline gap-2">
+                <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono tabular-nums">$99</span>
+                <span class="text-slate-400 text-sm font-mono">/month</span>
+              </div>
+              <div class="text-xs font-mono text-emerald-400 font-semibold mt-1">
+                + $100 one-time setup (paid only after demo approval)
+              </div>
+              <h3 class="text-xl font-bold text-white mt-2">All-Inclusive Managed Plan</h3>
+              <p class="text-sm text-slate-400 mt-1">
+                Complete website launch, enterprise edge hosting, domain, and ongoing care.
+              </p>
             </div>
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Cloudflare 99.9% uptime edge hosting</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Automated SSL security certificate (HTTPS)</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>3 Content updates &amp; revisions per month</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>5–7 business days to production launch</span>
-            </div>
-            <div class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-300">
-              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>Zero cancellation fee after 6 months</span>
-            </div>
+
+            <!-- Bullet Checklist -->
+            <ul class="space-y-3 pt-4 border-t border-white/[0.08] text-sm text-slate-300">
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Complete Multi-Page Custom Website Launch</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Cloudflare Global Edge Hosting ($0 extra)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Custom Domain Registration or Connection + SSL ($0 extra)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Up to 3 Content/Design Edits Every Month Included</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>95–100 Mobile PageSpeed Engineering</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Technical SEO, Sitemap &amp; Schema Markup</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>99.9% Uptime SLA &amp; 12-Hour Priority Support</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Cancel Anytime — No Long-Term Lock-In Contracts</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-auto pt-8">
+            <a
+              href="/contact?plan=managed-99"
+              class="magnetic-btn w-full py-4 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-xl shadow-sky-500/25 transition-all text-center"
+            >
+              <span>Claim Your $0 Demo &amp; Lock In $99/mo →</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Interactive Feature: Break-Even Industry Switcher (With Glassmorphic Surfaces) -->
-  <section class="py-16 md:py-24 bg-white/50 dark:bg-slate-950/40 border-y border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-teal dark:text-teal-400 mb-3">Math Over Marketing</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">Calculate Your Break-Even</p>
-        <p class="text-slate-600 dark:text-slate-400 text-sm mt-3">Select your trade to see how fast a modern website pays for itself.</p>
-      </div>
-
-      <!-- Industry Pills -->
-      <div class="flex flex-wrap justify-center gap-2.5 mb-8">
-        {industries.map((ind, i) => (
-          <button
-            type="button"
-            class={`industry-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition ${
-              i === 0
-                ? 'bg-accent-blue text-white border-accent-blue'
-                : 'bg-white/80 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-accent-blue'
-            }`}
-            data-val={ind.value}
-            data-label={ind.name}
-            data-metric={ind.metric}
-          >
-            {ind.name}
-          </button>
-        ))}
-      </div>
-
-      <!-- Result Card (With 3D Tilt) -->
-      <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-center shadow-card backdrop-blur-md">
-        <p id="break-even-calc-result" class="text-xl sm:text-2xl font-extrabold text-primary-dark dark:text-slate-50 font-display mb-3">
-          At $99/month, gaining just ONE single new customer from your website pays for your entire year of service.
-        </p>
-        <p id="break-even-details" class="text-sm text-slate-500 dark:text-slate-400">
-          Based on an average job value of $350 in Plumbing vs. Web Harbor's total Year 1 cost ($1,288).
-        </p>
-      </div>
+  <!-- Interactive ROI Calculator Section -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal>
+      <RoiCalculator />
     </div>
   </section>
 
-  <!-- FAQ Accordion (With Glassmorphic Surfaces) -->
-  <section class="py-16 md:py-24 relative z-10">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-xl mx-auto mb-16">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-blue dark:text-blue-400 mb-3">Questions &amp; Answers</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">Frequently Asked Questions</p>
+  <!-- Full Comparison Matrix Section -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal>
+      <ComparisonTable />
+    </div>
+  </section>
+
+  <!-- Pricing FAQ Accordion (6 Questions from src/data/faqs.ts) -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>FREQUENTLY ASKED QUESTIONS</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+          Clear Answers to All Pricing Questions
+        </h2>
+        <p class="text-slate-400 text-base mt-2">
+          No legalese. No hidden clauses. Everything explained in plain English.
+        </p>
       </div>
 
-      <div class="space-y-4">
-        {faqs.map((faq) => (
-          <div data-tilt class="p-6 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-xs backdrop-blur-md transition-all duration-200">
-            <h3 class="text-base font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">{faq.q}</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{faq.a}</p>
-          </div>
+      <div class="space-y-4" data-reveal>
+        {PRICING_FAQS.map((faq, idx) => (
+          <details class="group rounded-2xl bg-slate-900/55 border border-white/[0.08] p-6 transition-all duration-200 hover:border-sky-400/30 open:bg-slate-900/80">
+            <summary class="flex items-center justify-between cursor-pointer list-none text-base sm:text-lg font-semibold text-white">
+              <span>{faq.question}</span>
+              <span class="ml-4 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/[0.05] text-slate-400 transition group-open:rotate-180 group-open:text-sky-400">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-4 pt-4 border-t border-white/[0.06] text-sm text-slate-300 leading-relaxed">
+              {faq.answer}
+            </div>
+          </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="py-16 md:py-24 bg-primary-dark text-white relative z-10 text-center">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <h2 class="text-3xl font-extrabold font-display mb-4">Start With A Free Spec Demo</h2>
-      <p class="text-slate-300 text-sm max-w-xl mx-auto mb-8">
-        No credit card, no sales calls. We deliver your custom prototype link within 48 hours.
-      </p>
-      <a
-        href="/contact/"
-        class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg transition duration-200"
-      >
-        Request Your Free Demo
-      </a>
-    </div>
-  </section>
+  <!-- Bottom Conversion Banner -->
+  <CtaBanner />
 </BaseLayout>
-
-<script>
-  function setupBreakEvenCalculator() {
-    const industryBtns = document.querySelectorAll('.industry-btn');
-    const calcResult = document.getElementById('break-even-calc-result');
-    const calcDetails = document.getElementById('break-even-details');
-
-    if (!industryBtns.length || !calcResult || !calcDetails) return;
-
-    industryBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        industryBtns.forEach((item) => {
-          item.classList.remove('bg-accent-blue', 'text-white', 'border-accent-blue');
-          item.classList.add('bg-white/80', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-700');
-        });
-
-        btn.classList.remove('bg-white/80', 'dark:bg-slate-800/80', 'text-slate-700', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-700');
-        btn.classList.add('bg-accent-blue', 'text-white', 'border-accent-blue');
-
-        const val = parseInt(btn.getAttribute('data-val') || '350', 10);
-        const label = btn.getAttribute('data-label') || 'Plumbing';
-        const annualSpend = 1288;
-        const customersNeeded = Math.ceil(annualSpend / val);
-
-        if (customersNeeded <= 1) {
-          calcResult.textContent = `At $99/month, gaining just ONE single new customer from your website pays for your entire year of service.`;
-        } else {
-          calcResult.textContent = `At $99/month, gaining just ${customersNeeded} new customers in a year pays for your entire annual web budget.`;
-        }
-
-        calcDetails.textContent = `Based on an average job value of $${val.toLocaleString()} in ${label} vs. Web Harbor's total Year 1 cost ($1,288).`;
-      });
-    });
-  }
-
-  document.addEventListener('astro:page-load', setupBreakEvenCalculator);
-</script>

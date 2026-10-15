@@ -1,0 +1,262 @@
+---
+// src/components/LeakAuditor.astro
+// Interactive Speed & Revenue Leak Auditor matching Section 6.2
+---
+
+<div class="leak-auditor-root max-w-6xl mx-auto rounded-3xl bg-slate-900/65 border border-white/10 p-6 sm:p-10 backdrop-blur-xl shadow-2xl">
+  <!-- Eyebrow & Heading -->
+  <div class="text-center max-w-3xl mx-auto mb-10">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-400/20 text-rose-400 text-xs font-mono uppercase tracking-widest mb-4">
+      <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+      <span>DIAGNOSTIC LEAK AUDITOR</span>
+    </div>
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+      Website Speed &amp; Revenue Leak Auditor
+    </h2>
+    <p class="text-slate-400 text-sm sm:text-base mt-2">
+      Calculate the exact mobile traffic bounce penalties and revenue leaked through slow loading speeds.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+    <!-- Left 7 Columns (Diagnostic Inputs) -->
+    <div class="lg:col-span-7 space-y-6">
+      <!-- Setup Selector -->
+      <div>
+        <label class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-3">
+          Current Website Setup
+        </label>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 setup-pill-group">
+          <button
+            type="button"
+            data-setup="WordPress / Elementor"
+            data-factor="65"
+            class="setup-pill active px-3 py-3 rounded-xl text-xs font-semibold border border-sky-400/50 bg-sky-500/15 text-sky-400 transition text-center"
+          >
+            WordPress
+          </button>
+          <button
+            type="button"
+            data-setup="Wix / Squarespace"
+            data-factor="45"
+            class="setup-pill px-3 py-3 rounded-xl text-xs font-semibold border border-white/10 bg-slate-900/50 text-slate-300 hover:border-white/20 hover:text-white transition text-center"
+          >
+            Wix / Squarespace
+          </button>
+          <button
+            type="button"
+            data-setup="Legacy Agency Site"
+            data-factor="150"
+            class="setup-pill px-3 py-3 rounded-xl text-xs font-semibold border border-white/10 bg-slate-900/50 text-slate-300 hover:border-white/20 hover:text-white transition text-center"
+          >
+            Legacy Agency
+          </button>
+          <button
+            type="button"
+            data-setup="No Website / Outdated"
+            data-factor="80"
+            class="setup-pill px-3 py-3 rounded-xl text-xs font-semibold border border-white/10 bg-slate-900/50 text-slate-300 hover:border-white/20 hover:text-white transition text-center"
+          >
+            Outdated / None
+          </button>
+        </div>
+      </div>
+
+      <!-- Monthly Website Visitors -->
+      <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+        <div class="flex justify-between items-center mb-2">
+          <label for="leak-visitors-slider" class="text-sm font-semibold text-white">
+            Monthly Website Visitors
+          </label>
+          <span class="leak-visitors-val px-2.5 py-0.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 font-mono font-bold text-sm tabular-nums">
+            1,200
+          </span>
+        </div>
+        <input
+          type="range"
+          id="leak-visitors-slider"
+          class="leak-visitors-slider w-full cursor-pointer accent-sky-400"
+          min="200"
+          max="10000"
+          step="100"
+          value="1200"
+        />
+        <div class="flex justify-between text-xs font-mono text-slate-500 mt-2">
+          <span>200</span>
+          <span>5,000</span>
+          <span>10,000</span>
+        </div>
+      </div>
+
+      <!-- Average Value Per New Customer ($) -->
+      <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+        <div class="flex justify-between items-center mb-2">
+          <label for="leak-value-slider" class="text-sm font-semibold text-white">
+            Average Value Per New Customer ($)
+          </label>
+          <span class="leak-value-val px-2.5 py-0.5 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 font-mono font-bold text-sm tabular-nums">
+            $450
+          </span>
+        </div>
+        <input
+          type="range"
+          id="leak-value-slider"
+          class="leak-value-slider w-full cursor-pointer accent-sky-400"
+          min="100"
+          max="3000"
+          step="50"
+          value="450"
+        />
+        <div class="flex justify-between text-xs font-mono text-slate-500 mt-2">
+          <span>$100</span>
+          <span>$1,500</span>
+          <span>$3,000</span>
+        </div>
+      </div>
+
+      <!-- Current Mobile Load Time (Seconds) -->
+      <div class="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08]">
+        <div class="flex justify-between items-center mb-2">
+          <label for="leak-speed-slider" class="text-sm font-semibold text-white">
+            Current Mobile Load Time (Seconds)
+          </label>
+          <span class="leak-speed-val px-2.5 py-0.5 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 font-mono font-bold text-sm tabular-nums">
+            4.5s
+          </span>
+        </div>
+        <input
+          type="range"
+          id="leak-speed-slider"
+          class="leak-speed-slider w-full cursor-pointer accent-rose-400"
+          min="1.5"
+          max="8.0"
+          step="0.5"
+          value="4.5"
+        />
+        <div class="flex justify-between text-xs font-mono text-slate-500 mt-2">
+          <span class="text-emerald-400">1.5s (Edge Fast)</span>
+          <span>4.5s (Average CMS)</span>
+          <span class="text-rose-400">8.0s (Severe Lag)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right 5 Columns (Live Audit Readout) -->
+    <div class="lg:col-span-5">
+      <div class="rounded-2xl bg-slate-950/90 border border-white/10 p-6 sm:p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden space-y-6">
+        <div>
+          <div class="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Live Readout</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-400 text-xs font-mono border border-rose-500/20">
+              High Risk Factor
+            </span>
+          </div>
+
+          <!-- Mobile Bounce Loss % -->
+          <div class="mt-4">
+            <div class="text-xs text-slate-400 mb-1">Mobile Bounce Penalty:</div>
+            <div class="leak-bounce-penalty text-3xl font-extrabold text-rose-400 font-mono tabular-nums">
+              33%
+            </div>
+            <p class="text-xs text-slate-500 mt-1">
+              Estimated visitors abandoning before your first mobile screen paints.
+            </p>
+          </div>
+
+          <!-- Estimated Missed Opportunities/Yr -->
+          <div class="mt-4 pt-4 border-t border-white/[0.08]">
+            <div class="text-xs text-slate-400 mb-1">Estimated Missed Leads / Year:</div>
+            <div class="leak-missed-leads text-2xl font-bold text-amber-400 font-mono tabular-nums">
+              120 leads
+            </div>
+          </div>
+
+          <!-- Projected Annual Revenue Leaked -->
+          <div class="mt-4 pt-4 border-t border-white/[0.08]">
+            <div class="text-xs uppercase font-mono tracking-wider text-rose-400 mb-1">Projected Annual Revenue Leaked:</div>
+            <div class="leak-annual-risk text-3xl sm:text-4xl font-extrabold text-white font-mono tabular-nums tracking-tight">
+              $13,500
+            </div>
+            <p class="text-xs text-slate-400 mt-1">
+              Lost direct revenue to faster local competitors.
+            </p>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-white/[0.08]">
+          <a
+            href="/contact?source=speed-audit"
+            class="magnetic-btn w-full py-4 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-sky-500/25 transition-all text-center"
+          >
+            <span>Plug This Leak With a Free 99-PageSpeed Demo →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initLeakAuditors() {
+    const roots = document.querySelectorAll<HTMLElement>('.leak-auditor-root');
+
+    roots.forEach((root) => {
+      const pills = root.querySelectorAll<HTMLButtonElement>('.setup-pill');
+      const visitorsSlider = root.querySelector<HTMLInputElement>('.leak-visitors-slider');
+      const valueSlider = root.querySelector<HTMLInputElement>('.leak-value-slider');
+      const speedSlider = root.querySelector<HTMLInputElement>('.leak-speed-slider');
+
+      const visitorsVal = root.querySelector<HTMLElement>('.leak-visitors-val');
+      const valueVal = root.querySelector<HTMLElement>('.leak-value-val');
+      const speedVal = root.querySelector<HTMLElement>('.leak-speed-val');
+
+      const bounceEl = root.querySelector<HTMLElement>('.leak-bounce-penalty');
+      const missedLeadsEl = root.querySelector<HTMLElement>('.leak-missed-leads');
+      const annualRiskEl = root.querySelector<HTMLElement>('.leak-annual-risk');
+
+      if (!visitorsSlider || !valueSlider || !speedSlider || !bounceEl || !missedLeadsEl || !annualRiskEl) {
+        return;
+      }
+
+      function updateAudit() {
+        const visitors = parseInt(visitorsSlider!.value, 10);
+        const customerValue = parseInt(valueSlider!.value, 10);
+        const loadTime = parseFloat(speedSlider!.value);
+
+        visitorsVal!.textContent = visitors.toLocaleString();
+        valueVal!.textContent = `$${customerValue.toLocaleString()}`;
+        speedVal!.textContent = `${loadTime.toFixed(1)}s`;
+
+        // Exact Formulas from Section 6.2
+        const bouncePenalty = Math.max(0, Math.round((loadTime - 1.0) * 9.5));
+        const lostLeadsPerMonth = Math.max(1, Math.round(visitors * 0.025 * (bouncePenalty / 100)));
+        const missedOpportunitiesYr = lostLeadsPerMonth * 12;
+        const annualRevenueRisk = Math.round(lostLeadsPerMonth * 12 * customerValue * 0.25);
+
+        bounceEl!.textContent = `${bouncePenalty}%`;
+        missedLeadsEl!.textContent = `${missedOpportunitiesYr.toLocaleString()} leads / yr`;
+        annualRiskEl!.textContent = `$${annualRevenueRisk.toLocaleString()}`;
+      }
+
+      pills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          pills.forEach((p) => {
+            p.classList.remove('active', 'border-sky-400/50', 'bg-sky-500/15', 'text-sky-400');
+            p.classList.add('border-white/10', 'bg-slate-900/50', 'text-slate-300');
+          });
+          pill.classList.add('active', 'border-sky-400/50', 'bg-sky-500/15', 'text-sky-400');
+          pill.classList.remove('border-white/10', 'bg-slate-900/50', 'text-slate-300');
+          updateAudit();
+        });
+      });
+
+      visitorsSlider.addEventListener('input', updateAudit);
+      valueSlider.addEventListener('input', updateAudit);
+      speedSlider.addEventListener('input', updateAudit);
+
+      updateAudit();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initLeakAuditors);
+</script>

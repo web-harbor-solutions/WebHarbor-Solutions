@@ -1,0 +1,130 @@
+---
+// src/components/SeoHead.astro
+// Complete Technical SEO, OpenGraph & JSON-LD Schema Engine
+
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: string;
+  faqs?: FaqItem[];
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const {
+  title = 'Web Harbor Solutions | See Your New Website Live Before You Pay',
+  description = 'The Zero-Risk Web Engineering Agency. We build your complete, custom high-speed website first. You only pay if you love it: $100 setup + $99/month all-inclusive.',
+  canonical = Astro.url.href,
+  ogImage = 'https://webharborsolutions.com/og-image.jpg',
+  type = 'website',
+  faqs = [],
+  breadcrumbs,
+} = Astro.props;
+
+// Clean canonical URL
+const cleanCanonical = canonical.split('?')[0];
+
+// ProfessionalService Schema matching Section 8
+const professionalServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': 'https://webharborsolutions.com/#organization',
+  name: 'Web Harbor Solutions',
+  url: 'https://webharborsolutions.com',
+  logo: 'https://webharborsolutions.com/favicon.svg',
+  image: ogImage,
+  description: 'The Zero-Risk Web Engineering Agency. We build your complete, custom high-speed website first. You only pay if you love it.',
+  email: 'webharborsolutions@gmail.com',
+  priceRange: '$99/mo',
+  currenciesAccepted: 'USD',
+  paymentAccepted: 'Credit Card, Stripe, Bank Transfer',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Web Engineering & Managed Edge Infrastructure',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        name: 'Live Spec Demo ($0 Upfront)',
+        description: 'Complete custom working website demo delivered on private Cloudflare staging link in 48–72 hours with zero upfront obligation.',
+        price: '0.00',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        name: 'All-Inclusive Launch & Managed Plan',
+        description: 'Complete website launch, Cloudflare global edge hosting, custom domain, SSL, 99.9% uptime SLA, and up to 3 monthly content/design edits included.',
+        price: '99.00',
+        priceCurrency: 'USD',
+        billingDuration: 'P1M',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: '99.00',
+          priceCurrency: 'USD',
+          unitText: 'MONTH',
+        },
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+  },
+};
+
+// FAQPage Schema if FAQs exist
+const faqSchema =
+  faqs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
+      }
+    : null;
+---
+
+<!-- Technical Meta Tags -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={cleanCanonical} />
+
+<!-- OpenGraph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={cleanCanonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:site_name" content="Web Harbor Solutions" />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter / X Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={cleanCanonical} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Robots Directive -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+<!-- Structured Data: ProfessionalService & Offers -->
+<script type="application/ld+json" set:html={JSON.stringify(professionalServiceSchema)} />
+
+<!-- Structured Data: FAQPage (if applicable) -->
+{faqSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+)}

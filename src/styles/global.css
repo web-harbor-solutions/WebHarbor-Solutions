@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -28,43 +28,104 @@ html.lenis, html.lenis body {
 }
 
 /* --------------------------------------------------------------------------
-   Theme & Base Defaults
+   Pure Dark Mode Lock & Deep Obsidian Baseline
    -------------------------------------------------------------------------- */
-:root {
-  color-scheme: light;
-  --bg-primary: #f8fafc;
-  --text-primary: #0f172a;
+:root, html.dark {
+  color-scheme: dark;
 }
 
-html.dark {
-  color-scheme: dark;
-  --bg-primary: #090d16;
-  --text-primary: #f8fafc;
+html {
+  background-color: #05070e;
+  color: #ffffff;
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: #05070e;
+  color: #cbd5e1;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* View transitions fade polish */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.25s;
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #05070e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
 }
 
-/* Three.js canvas container */
-#webgl-background-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+/* --------------------------------------------------------------------------
+   Cursor-Tracking Spotlight Effect (Section 3.3)
+   -------------------------------------------------------------------------- */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(500px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(56, 189, 248, 0.12), transparent 40%);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Range Sliders Styling
+   -------------------------------------------------------------------------- */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #7dd3fc;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  background: #7dd3fc;
 }

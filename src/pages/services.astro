@@ -1,192 +1,271 @@
 ---
 // src/pages/services.astro
+// Services page strictly following Section 7.5 specifications
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LeakAuditor from '../components/LeakAuditor.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+
+const seoTitle = 'Services & Architecture | Full-Stack Managed Web Infrastructure | Web Harbor Solutions';
+const seoDesc = 'Everything required to dominate your local market. 95–100 PageSpeed scores, Cloudflare edge hosting, and up to 3 monthly edits included for $99/mo.';
 ---
 
-<BaseLayout
-  title="Services & Capabilities | Web Harbor Solutions"
-  description="Complete website development, high-speed Cloudflare hosting, security maintenance, and monthly updates for local service businesses."
-  canonical="https://webharborsolutions.com/services/"
->
-  <!-- Header -->
-  <section class="pt-16 pb-12 md:pt-24 md:pb-16 text-center relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-accent-blue/10 text-accent-blue dark:text-blue-400 border border-blue-500/20 mb-6 backdrop-blur-md">
-        <span>Turnkey Digital Infrastructure</span>
-      </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-primary-dark dark:text-slate-50 font-display tracking-tight mb-6">
-        Everything Your Local Business Needs Online.
-      </h1>
-      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-        No surprise hourly invoices or complicated technical maintenance. We bundle custom engineering, lightning-fast edge hosting, and ongoing monthly updates into one simple plan.
-      </p>
-    </div>
-  </section>
-
-  <!-- Core Offering: The Turnkey Website Plan -->
-  <section class="py-12 md:py-20 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-teal dark:text-teal-400 mb-3">The Foundation</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">The Turnkey Website Plan — $99/Month</p>
-        <p class="text-slate-600 dark:text-slate-400 text-sm mt-3">One predictable monthly retainer covering all your digital bases.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Feature 1 -->
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-accent-blue dark:text-blue-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-          </div>
-          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">Custom-Coded Development</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Hand-crafted, modern semantic architecture. Zero bloated WordPress themes, zero slow page builders, and zero unnecessary script weight.
-          </p>
+<BaseLayout title={seoTitle} description={seoDesc}>
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto space-y-6" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>FULL-STACK MANAGED WEB INFRASTRUCTURE</span>
         </div>
 
-        <!-- Feature 2 -->
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-950/60 text-accent-teal dark:text-teal-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>
-          </div>
-          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">Edge Cloudflare Hosting</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Deployed across Cloudflare’s 300+ city global edge data centers. Sub-second load times, instant DNS resolution, and 99.9% uptime SLA.
-          </p>
-        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]">
+          Everything Required to Dominate Your Local Market. One Flat Subscription.
+        </h1>
 
-        <!-- Feature 3 -->
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-          </div>
-          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">Domain Registration &amp; SSL</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            One primary custom domain (.com, .net, .org) included annually with automatic renewal and automated SSL encryption certificates.
-          </p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-          </div>
-          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">3 Monthly Updates Included</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Swap seasonal promos, adjust business hours, update dispatch phone numbers, or upload fresh project photos with a simple email.
-          </p>
-        </div>
-
-        <!-- Feature 5 -->
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
-          </div>
-          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">Mobile-First Responsiveness</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Over 70% of local service queries come from mobile phones. We engineer click-to-call headers, sticky emergency buttons, and crisp mobile layouts.
-          </p>
-        </div>
-
-        <!-- Feature 6 -->
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300">
-          <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </div>
-          <h3 class="text-lg font-bold text-primary-dark dark:text-slate-100 mb-2 font-display">Essential Local SEO Baseline</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Structured local schema markup, Google Business Profile links, OpenGraph cards, and city-targeted semantic headers built right in.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Transparent Scope Boundaries: What Is NOT Included -->
-  <section class="py-16 bg-white/50 dark:bg-slate-950/40 border-y border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div data-tilt class="p-8 sm:p-10 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
-        <div class="flex items-center gap-3 mb-6">
-          <span class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-700 dark:text-slate-300">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-          </span>
-          <h2 class="text-2xl font-bold text-primary-dark dark:text-slate-100 font-display">Transparent Scope Boundaries</h2>
-        </div>
-        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
-          To maintain our $99/mo rate without hidden surcharges, we hold firm boundaries on what is covered under the base maintenance retainer:
+        <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
+          We don't sell fragmented add-ons or surprise hourly retainers. Every Web Harbor website includes enterprise edge engineering and ongoing management.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div class="p-4 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-start gap-2.5">
-            <span class="text-red-500 font-bold text-sm">✕</span>
-            <span>Complete website overhauls or structural re-architecting</span>
-          </div>
-          <div class="p-4 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-start gap-2.5">
-            <span class="text-red-500 font-bold text-sm">✕</span>
-            <span>Custom database web apps or multi-vendor eCommerce portals</span>
-          </div>
-          <div class="p-4 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 flex items-start gap-2.5">
-            <span class="text-red-500 font-bold text-sm">✕</span>
-            <span>Paid advertising spend (Google Ads, Meta Ads management)</span>
-          </div>
+        <div class="pt-2 flex justify-center">
+          <a
+            href="/contact"
+            class="magnetic-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-xl shadow-sky-500/25 transition-all"
+          >
+            <span>Request Your $0 Spec Prototype →</span>
+          </a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <p class="text-xs text-slate-500 dark:text-slate-400 italic">
-          *Need custom expansions later? We quote those transparently as individual add-ons after your core foundation is live and bringing in leads.
+  <!-- 6 Core Service Pillars (3x2 Equal-Height Spotlight Grid) -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>CORE INFRASTRUCTURE PILLARS</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
+          Built For Speed, Security, and Direct Inbound Calls
+        </h2>
+        <p class="text-slate-400 text-base mt-3">
+          Every standard deployment includes all 6 enterprise pillars at no added cost.
         </p>
       </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <!-- Pillar 1 -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-sky-400">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Custom High-Conversion Web Engineering
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Hand-crafted Astro &amp; modern static architecture tailored to convert local traffic into calls and booked appointments.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-sky-400 font-mono border-t border-white/[0.06]">
+            Conversion-Engineered Codebase
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-sky-400">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Cloudflare Global Edge Hosting &amp; SSL
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Deployed across 300+ global edge data centers with zero cold starts, DDoS mitigation, and automatic TLS/SSL encryption.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-sky-400 font-mono border-t border-white/[0.06]">
+            Global Edge Distribution
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              95–100 Google PageSpeed Optimization
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Sub-second mobile loading, zero bloated WordPress plugins, optimized modern assets, and Core Web Vitals compliance.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-emerald-400 font-mono border-t border-white/[0.06]">
+            Sub-0.5s Mobile LCP
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-sky-400">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Local SEO &amp; Schema.org Architecture
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Built-in JSON-LD structured data (LocalBusiness / ProfessionalService), clean semantic HTML, automatic XML sitemaps, and meta optimization.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-sky-400 font-mono border-t border-white/[0.06]">
+            Semantic Schema Automation
+          </div>
+        </div>
+
+        <!-- Pillar 5 -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Proactive Maintenance &amp; 3 Monthly Edits
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Need to update pricing, add team photos, launch a seasonal promo, or tweak copy? Send an email and we execute up to 3 edits/month within 24–48 hours.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-indigo-400 font-mono border-t border-white/[0.06]">
+            $0 Extra Hourly Charges
+          </div>
+        </div>
+
+        <!-- Pillar 6 -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-sky-400">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Headless Lead Capture &amp; Instant Alerts
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              High-converting quote calculators, multi-step intake forms, and direct webhook delivery to your email, CRM, or Google Sheets.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-sky-400 font-mono border-t border-white/[0.06]">
+            Instant Lead Routing
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Optional Post-Launch Add-Ons -->
-  <section class="py-16 md:py-24 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-blue dark:text-blue-400 mb-3">Growth Accelerators</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">Optional Post-Launch Add-Ons</p>
+  <!-- Technical Architecture Breakdown ("Why Edge Static Beats WordPress") -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>ARCHITECTURAL BENCHMARK</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
+          Why Edge Static Beats Traditional WordPress
+        </h2>
+        <p class="text-slate-400 text-base mt-3">
+          A side-by-side technical breakdown of why monolithic database CMS architectures fail modern local businesses.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Google Business Profile Audit</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-            Category restructuring, secondary trade optimization, service area tuning, and business description optimization to win map-pack rankings.
-          </p>
-          <span class="inline-block text-xs font-semibold text-accent-blue dark:text-blue-400">Available Post-Launch</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <!-- TTFB -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8" data-reveal>
+          <div class="space-y-4">
+            <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Metric 01: Time to First Byte</div>
+            <h3 class="text-2xl font-bold text-white">TTFB Latency</h3>
+            <div class="space-y-2 pt-2 text-sm font-mono">
+              <div class="flex justify-between items-center text-rose-400">
+                <span>WordPress:</span>
+                <span class="tabular-nums font-bold">800ms – 1,800ms</span>
+              </div>
+              <div class="flex justify-between items-center text-emerald-400">
+                <span>Web Harbor Edge:</span>
+                <span class="tabular-nums font-bold">&lt; 50ms</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pt-2">
+              Instead of querying MySQL and executing PHP on a distant server, Cloudflare serves pre-rendered HTML from the nearest cell tower in under 50 milliseconds.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-emerald-400 font-mono border-t border-white/[0.06]">
+            16x Faster Server Response
+          </div>
         </div>
 
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Localized Service Area Pages</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-            Dedicated landing pages targeting neighboring towns, suburbs, and zip codes to capture service calls outside your primary municipality.
-          </p>
-          <span class="inline-block text-xs font-semibold text-accent-blue dark:text-blue-400">Available Post-Launch</span>
+        <!-- Attack Surface -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8" data-reveal>
+          <div class="space-y-4">
+            <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Metric 02: Vulnerability Surface</div>
+            <h3 class="text-2xl font-bold text-white">Attack Surface</h3>
+            <div class="space-y-2 pt-2 text-sm font-mono">
+              <div class="flex justify-between items-center text-rose-400">
+                <span>WordPress:</span>
+                <span class="font-bold">40+ Plugins &amp; SQL</span>
+              </div>
+              <div class="flex justify-between items-center text-emerald-400">
+                <span>Web Harbor Edge:</span>
+                <span class="font-bold">Zero Database Layer</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pt-2">
+              With zero live databases, zero PHP interpreters, and no vulnerable plugins, our static sites are immune to SQL injection, brute force logins, and malware injection.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-emerald-400 font-mono border-t border-white/[0.06]">
+            Immune to Traditional CMS Exploits
+          </div>
         </div>
 
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md">
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Reputation &amp; Review Funnel</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">
-            Automated review generation QR codes and SMS follow-up templates designed to guide satisfied customers straight to your Google review link.
-          </p>
-          <span class="inline-block text-xs font-semibold text-accent-blue dark:text-blue-400">Available Post-Launch</span>
+        <!-- Uptime -->
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8" data-reveal>
+          <div class="space-y-4">
+            <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Metric 03: Reliability SLA</div>
+            <h3 class="text-2xl font-bold text-white">Infrastructure Uptime</h3>
+            <div class="space-y-2 pt-2 text-sm font-mono">
+              <div class="flex justify-between items-center text-rose-400">
+                <span>Shared cPanel:</span>
+                <span class="font-bold">95–98% (Crashes Often)</span>
+              </div>
+              <div class="flex justify-between items-center text-emerald-400">
+                <span>Web Harbor Edge:</span>
+                <span class="font-bold">99.99% Global Edge</span>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed pt-2">
+              Replicated instantly across 300+ worldwide data centers. If one server experiences maintenance, traffic is automatically routed to the next node without downtime.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-emerald-400 font-mono border-t border-white/[0.06]">
+            99.9% Documented SLA
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="py-16 md:py-24 bg-primary-dark text-white relative z-10 text-center">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <h2 class="text-3xl font-extrabold font-display mb-4">Experience the $99/mo Difference</h2>
-      <p class="text-slate-300 text-sm max-w-xl mx-auto mb-8">
-        We build your live demo first. You don't commit to a plan until you see your site live in action.
-      </p>
-      <a
-        href="/contact/"
-        class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg transition duration-200"
-      >
-        Claim Your Free Spec Demo
-      </a>
+  <!-- Interactive Speed & Revenue Leak Auditor -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal>
+      <LeakAuditor />
     </div>
   </section>
+
+  <!-- Bottom Conversion Banner -->
+  <CtaBanner />
 </BaseLayout>

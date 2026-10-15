@@ -1,73 +1,73 @@
 ---
 // src/pages/terms.astro
+// Terms of Service & SLA strictly adhering to Section 1 & Section 7.10
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = 'Terms of Service & SLA | Web Harbor Solutions';
+const seoDesc = 'Commercial terms of service, $0 upfront spec demo evaluation, $100 setup fee upon approval, $99/mo subscription scope, 99.9% uptime SLA, and month-to-month flexibility.';
 ---
 
-<BaseLayout
-  title="Terms of Service & SLA | Web Harbor Solutions"
-  description="Complete terms of service, billing schedules, 6-month term parameters, and scope boundaries for Web Harbor Solutions clients."
-  canonical="https://webharborsolutions.com/terms/"
->
-  <main class="py-16 md:py-24 relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="bg-white/80 dark:bg-slate-900/80 p-8 sm:p-14 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md space-y-8">
+<BaseLayout title={seoTitle} description={seoDesc}>
+  <main class="py-20 lg:py-28 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto p-8 sm:p-14 rounded-3xl bg-slate-900/60 border border-white/[0.08] shadow-2xl backdrop-blur-xl space-y-10 text-white relative overflow-hidden">
         <div>
-          <span class="text-xs font-bold text-accent-blue dark:text-blue-400 uppercase tracking-wider">Client Service Agreement</span>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-slate-50 mt-1 font-display">Terms of Service &amp; SLA</h1>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Last Updated: October 2026 • Web Harbor Solutions Client Service Parameters</p>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span>CLIENT SERVICE AGREEMENT</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">Terms of Service &amp; SLA</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-2 font-mono">Last Updated: October 2026 • Transparent Commercial Scope</p>
         </div>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">1. Agreement Overview</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            These Terms of Service constitute a legally binding service agreement between Web Harbor Solutions ("Company") and the client ("Client"). By approving a website prototype for production launch or issuing initial setup payments, Client agrees to all terms, billing cycles, and policies outlined herein.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">1. Agreement Overview</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            These Terms of Service constitute a service agreement between Web Harbor Solutions ("we," "our," or "us") and the business entity engaging our services ("Client"). By requesting a live prototype or approving a website for custom domain launch, Client agrees to the terms and service parameters detailed below.
           </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">2. Fees &amp; Payment Terms</h2>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li><strong>Setup Fee:</strong> A one-time setup fee of $100 USD is payable in two equal installments: 50% ($50) prior to production launch on the client domain, and the remaining 50% ($50) only after verification that the website is successfully live on the domain.</li>
-            <li><strong>Monthly Service Retainer:</strong> $99 USD per month, commencing on the calendar date the website is pointed live to the Client's primary domain.</li>
-            <li><strong>Minimum Service Commitment:</strong> Six (6) consecutive calendar months from the verified go-live date.</li>
-            <li><strong>Cancellation Policy:</strong> Following the completion of the initial 6-month term, Client may cancel services at any time by providing thirty (30) days written notice via email to <code class="text-accent-teal font-mono text-xs">webharborsolutions@gmail.com</code> with zero penalty fees.</li>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">2. Commercial Model &amp; Pricing Structure</h2>
+          <ul class="space-y-2.5 text-sm sm:text-base text-slate-300 leading-relaxed list-disc list-inside">
+            <li><strong>$0 Upfront Spec Prototype:</strong> We conduct market research and code a custom working specification website preview hosted on a private Cloudflare staging URL at zero upfront cost. If the Client does not love the prototype, they owe $0 and walk away with zero obligation.</li>
+            <li><strong>$100 One-Time Setup Fee:</strong> Payable only after the Client reviews, tests, and approves the live custom website prototype for custom domain production launch.</li>
+            <li><strong>$99/Month All-Inclusive Plan:</strong> Covers Cloudflare global edge hosting, SSL encryption, custom domain registration or annual renewal, ongoing technical maintenance, security monitoring, and up to 3 content/design edits per calendar month.</li>
+            <li><strong>Month-to-Month Flexibility:</strong> Web Harbor Solutions operates on a flexible month-to-month basis. Client may cancel at any time with a simple written notice via email (<code class="text-sky-400 font-mono text-xs bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">webharborsolutions@gmail.com</code>). There are zero cancellation penalties or exit fees.</li>
           </ul>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">3. Included Scope of Service</h2>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li><strong>Turnkey Development:</strong> Hand-crafted static website engineered with modern semantic HTML and Tailwind CSS.</li>
-            <li><strong>Infrastructure &amp; Uptime:</strong> High-performance edge hosting on Cloudflare's global network with SSL certificates and 99.9% uptime SLA.</li>
-            <li><strong>Domain Management:</strong> Domain registration and annual renewals managed by Web Harbor Solutions at $0 additional expense during active subscription.</li>
-            <li><strong>Monthly Maintenance Allowance:</strong> Up to three (3) minor content updates per calendar month (e.g. changing text copy, updating business hours, swapping images, adding seasonal promotions). Monthly updates do not roll over between billing cycles.</li>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">3. Included Scope of Service &amp; Monthly Maintenance</h2>
+          <ul class="space-y-2 text-sm sm:text-base text-slate-300 leading-relaxed list-disc list-inside">
+            <li><strong>Static Edge Engineering:</strong> High-speed, mobile-responsive website compiled with Astro and distributed globally on Cloudflare Pages.</li>
+            <li><strong>3 Monthly Content &amp; Design Edits:</strong> Client may request up to 3 edits each billing month (e.g. updating pricing, adding team photos, publishing a promotion, modifying phone numbers, or updating business hours). Edits do not roll over between months.</li>
+            <li><strong>Turnaround SLA:</strong> Routine monthly maintenance edits are completed within 24 to 48 business hours at $0 extra hourly cost.</li>
+            <li><strong>Scope Exclusions:</strong> Large architectural pivots or multi-page custom web application builds outside the original website scope require a separate agreed specification.</li>
           </ul>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">4. Domain Ownership &amp; Code Release</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            The domain name registered on behalf of the Client is the sole property of the Client. In the event of service cancellation following the initial 6-month term, Web Harbor Solutions will initiate a domain transfer authorization code (EPP code) to the Client's chosen registrar within five (5) business days at zero transfer cost.
-          </p>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Because our static architecture is deeply integrated into our proprietary deployment workflows, code repository export files are not provided upon cancellation; however, Client maintains full legal rights to all copy, logos, branding assets, and photography supplied by Client.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">4. Infrastructure &amp; 99.9% Uptime SLA</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Web Harbor Solutions guarantees 99.9% infrastructure uptime for websites deployed across Cloudflare's global edge network. In the unlikely event of an edge-routing failure, our engineering team prioritizes restoration within 4 business hours.
           </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">5. Service Level Agreement (SLA) &amp; Response Times</h2>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li><strong>Support Inquiries:</strong> Guaranteed technical acknowledgment within 12 business hours.</li>
-            <li><strong>Content Maintenance Requests:</strong> Execution within 24 to 48 business hours.</li>
-            <li><strong>Emergency Downtime:</strong> Immediate triage and priority resolution within 4 business hours.</li>
-          </ul>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">5. Domain Ownership &amp; Code Release</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Client retains 100% legal ownership of their domain name and supplied brand assets. If Web Harbor registered the domain on the Client's behalf, upon written request we will release the EPP authorization code for transfer to the Client's registrar at zero transfer cost.
+          </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">6. Governing Law &amp; Dispute Resolution</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            These terms shall be governed by and construed in accordance with standard commercial contract law. Both parties agree that any disputes arising from this agreement shall be settled through amicable good-faith negotiation between the Client and Web Harbor Solutions leadership.
-          </p>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">6. Support SLA &amp; Communications</h2>
+          <div class="p-6 rounded-2xl bg-slate-950/70 border border-white/10 text-xs sm:text-sm text-slate-300 space-y-1.5 font-mono">
+            <p><strong class="text-white">Web Harbor Solutions Engineering Team</strong></p>
+            <p>Direct Inquiries: <a href="mailto:webharborsolutions@gmail.com" class="text-sky-400 hover:underline">webharborsolutions@gmail.com</a></p>
+            <p>Guaranteed Response SLA: Within 12 business hours</p>
+          </div>
         </section>
       </div>
     </div>

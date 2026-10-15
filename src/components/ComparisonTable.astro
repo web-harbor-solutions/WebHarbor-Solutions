@@ -1,0 +1,116 @@
+---
+// src/components/ComparisonTable.astro
+// Executive Comparison Matrix comparing Traditional Agency vs. DIY vs. Web Harbor Solutions
+
+interface Props {
+  showHeading?: boolean;
+}
+
+const { showHeading = true } = Astro.props;
+
+const comparisonRows = [
+  {
+    feature: 'Upfront Cost',
+    traditional: '$3,000 – $10,000',
+    diy: 'Your personal time + $30/mo',
+    webHarbor: '$100 Setup (Paid After Approval)',
+    highlight: true,
+  },
+  {
+    feature: 'See It Before Paying',
+    traditional: 'Never (wireframes only)',
+    diy: 'No (blank canvas)',
+    webHarbor: 'Yes (100% Live Custom Spec Demo)',
+    highlight: true,
+  },
+  {
+    feature: 'Monthly Maintenance',
+    traditional: '$150+/hour extra',
+    diy: 'You fix & debug it yourself',
+    webHarbor: 'Included (Up to 3 Edits/mo)',
+    highlight: true,
+  },
+  {
+    feature: 'Hosting, SSL & Domain',
+    traditional: 'Separate invoice ($25–$80/mo)',
+    diy: 'Included with bandwidth limits',
+    webHarbor: 'Included at $0 Extra',
+    highlight: true,
+  },
+  {
+    feature: 'Mobile PageSpeed Score',
+    traditional: '40–70 (Bloated CMS)',
+    diy: '50–70 (Heavy JS Bundles)',
+    webHarbor: '95–100 (Cloudflare Edge Static)',
+    highlight: true,
+  },
+  {
+    feature: 'Security & Plugin Crashes',
+    traditional: 'High Risk (SQL/Plugin exploits)',
+    diy: 'Proprietary Lock-in',
+    webHarbor: 'Zero Database Vulnerabilities',
+    highlight: true,
+  },
+];
+---
+
+<div class="w-full">
+  {showHeading && (
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+        <span>SIDE-BY-SIDE ARCHITECTURE COMPARISON</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+        The Web Harbor Advantage
+      </h2>
+      <p class="text-slate-400 text-sm sm:text-base mt-2">
+        See how our Edge Static model compares directly to traditional agencies and DIY website builders.
+      </p>
+    </div>
+  )}
+
+  <div class="overflow-x-auto rounded-2xl border border-white/[0.08] bg-slate-900/60 backdrop-blur-xl shadow-2xl">
+    <table class="w-full text-left border-collapse min-w-[680px]">
+      <thead>
+        <tr class="border-b border-white/[0.08] bg-white/[0.03]">
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-slate-400 w-1/4">
+            Feature
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-rose-400/90 w-1/4">
+            Traditional Agency
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-slate-400 w-1/4">
+            DIY Builders (Wix/Squarespace)
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-sky-400 bg-sky-500/[0.08] border-l border-r border-sky-400/20 w-1/4">
+            Web Harbor Solutions
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-white/[0.06] text-sm">
+        {comparisonRows.map((row) => (
+          <tr class="hover:bg-white/[0.02] transition-colors">
+            <td class="py-4 px-6 font-semibold text-white">
+              {row.feature}
+            </td>
+            <td class="py-4 px-6 text-slate-400 font-mono text-xs sm:text-sm">
+              {row.traditional}
+            </td>
+            <td class="py-4 px-6 text-slate-400 font-mono text-xs sm:text-sm">
+              {row.diy}
+            </td>
+            <td class="py-4 px-6 font-semibold text-sky-300 bg-sky-500/[0.06] border-l border-r border-sky-400/20 font-mono text-xs sm:text-sm">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>{row.webHarbor}</span>
+              </div>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>

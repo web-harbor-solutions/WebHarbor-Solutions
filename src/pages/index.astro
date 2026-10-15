@@ -1,241 +1,337 @@
 ---
 // src/pages/index.astro
+// Homepage of Web Harbor Solutions strictly following Section 7.3
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
 import RoiCalculator from '../components/RoiCalculator.astro';
+import IndustryBlueprintTable from '../components/IndustryBlueprintTable.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+
+const seoTitle = 'Web Harbor Solutions | See Your New Website Live Before You Pay a Single Dollar';
+const seoDesc = 'Most agencies demand $3,000 upfront. We build your complete, tailored website first for $0 upfront. Love it? Launch for $100 setup + $99/mo. If not, pay $0.';
 ---
 
-<BaseLayout
-  title="Web Harbor Solutions | High-Converting Websites for Local Businesses"
-  description="We build your custom business website before you pay a dime. Fast, mobile-first websites with hosting and maintenance for just $99/month."
-  canonical="https://webharborsolutions.com/"
->
-  <!-- 1. Hero Section -->
-  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-      <!-- Badge -->
-      <div class="hero-badge inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-accent-blue dark:bg-blue-400/10 dark:text-blue-400 border border-blue-500/20 mb-8 backdrop-blur-md shadow-xs">
-        <span class="w-2 h-2 rounded-full bg-accent-teal animate-pulse"></span>
-        The Zero-Risk Web Agency
-      </div>
+<BaseLayout title={seoTitle} description={seoDesc}>
+  <!-- Section 1: Hero Section (Split 12-Col Layout Over the 3D Canvas) -->
+  <section class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left 7 Cols -->
+        <div class="lg:col-span-7 space-y-6" data-reveal>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span>THE ZERO-RISK WEB AGENCY</span>
+          </div>
 
-      <!-- Main Headline -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary-dark dark:text-slate-50 tracking-tight font-display max-w-4xl mx-auto leading-[1.12] mb-6">
-        See Your New Website Live Before You Pay a <span class="bg-gradient-to-r from-accent-blue via-blue-500 to-accent-teal bg-clip-text text-transparent">Single Dollar</span>.
-      </h1>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08]">
+            See Your New Website Live Before You Pay a Single Dollar.
+          </h1>
 
-      <!-- Subheadline -->
-      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
-        Most agencies demand $3,000 upfront for wireframes and empty promises. We build your complete, tailored website first. If you love it, we launch it. If you don't, you pay nothing.
-      </p>
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+            Most agencies demand $3,000 upfront for wireframes and empty promises. We build your complete, tailored website first. If you love it, we launch it for $100 setup + $99/mo. If you don't, you pay nothing.
+          </p>
 
-      <!-- CTA Buttons -->
-      <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-        <a
-          href="/contact/"
-          class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg hover:shadow-glow transition duration-200 gap-2 group"
-        >
-          <span>Claim Your Free Demo Website</span>
-          <svg class="w-5 h-5 group-hover:translate-x-1 transition duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="m9 18 6-6-6-6"></path>
-          </svg>
-        </a>
-        <a
-          href="/portfolio/"
-          class="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 rounded-xl text-base font-semibold text-slate-700 dark:text-slate-200 bg-white/80 dark:bg-slate-900/80 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 shadow-xs backdrop-blur-md transition duration-200"
-        >
-          Explore Live Demos
-        </a>
-      </div>
+          <!-- Dual CTAs -->
+          <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <a
+              href="/contact"
+              class="magnetic-btn inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-base shadow-xl shadow-sky-500/25 transition-all"
+            >
+              <span>Claim Your Free Demo Website →</span>
+            </a>
+            <a
+              href="/portfolio"
+              class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-white font-semibold text-base transition-all"
+            >
+              <span>Explore Industry Blueprints</span>
+            </a>
+          </div>
 
-      <!-- Trust Badges -->
-      <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs font-medium text-slate-500 dark:text-slate-400">
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>5–7 Day Turnaround</span>
+          <!-- Trust Micro-Bar -->
+          <div class="pt-4 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-slate-400 font-mono">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>5–7 Day Turnaround</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>No Long-Term Contracts</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>100% Free Spec Demo</span>
+            </span>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>No Long-Term Contracts</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>100% Free Spec Demo</span>
+
+        <!-- Right 5 Cols: Live Performance & Telemetry Console Card -->
+        <div class="lg:col-span-5" data-reveal>
+          <div class="spotlight-card rounded-3xl bg-slate-900/60 border border-white/10 p-6 sm:p-8 backdrop-blur-xl shadow-2xl space-y-6">
+            <!-- Console Header -->
+            <div class="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold">Live Telemetry Console</span>
+              </div>
+              <span class="text-[11px] font-mono text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-400/20">
+                EDGE STATIC
+              </span>
+            </div>
+
+            <!-- Lighthouse 4-Gauge Metric Grid -->
+            <div>
+              <div class="text-xs font-mono uppercase text-slate-400 mb-3">Google Lighthouse Production Score</div>
+              <div class="grid grid-cols-4 gap-2 text-center">
+                <div class="p-2.5 rounded-xl bg-white/[0.02] border border-emerald-500/20">
+                  <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono tabular-nums">99</div>
+                  <div class="text-[10px] text-slate-400 font-mono uppercase mt-1">Perf</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/[0.02] border border-emerald-500/20">
+                  <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono tabular-nums">100</div>
+                  <div class="text-[10px] text-slate-400 font-mono uppercase mt-1">Access</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/[0.02] border border-emerald-500/20">
+                  <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono tabular-nums">100</div>
+                  <div class="text-[10px] text-slate-400 font-mono uppercase mt-1">Best Prac</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-white/[0.02] border border-emerald-500/20">
+                  <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono tabular-nums">100</div>
+                  <div class="text-[10px] text-slate-400 font-mono uppercase mt-1">SEO</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Telemetry Metrics List -->
+            <div class="space-y-3 pt-2 text-xs font-mono border-t border-white/[0.08]">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">First Contentful Paint (FCP):</span>
+                <span class="text-emerald-400 font-bold tabular-nums">0.4s</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Cloudflare Edge Network:</span>
+                <span class="text-sky-400 font-bold">Active (300+ Cities)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Database Attack Surface:</span>
+                <span class="text-emerald-400 font-bold">Zero (Static Output)</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400">Upfront Financial Risk:</span>
+                <span class="text-emerald-400 font-bold">$0 Verified</span>
+              </div>
+            </div>
+
+            <!-- System Status Indicator -->
+            <div class="pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs text-slate-400">
+              <span class="flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                <span>Sub-Second TTFB Guaranteed</span>
+              </span>
+              <a href="/services" class="text-sky-400 hover:text-sky-300 font-medium">
+                View Architecture →
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. Pain Point Grid (With 3D Perspective Tilt) -->
-  <section class="py-16 md:py-24 bg-white/50 dark:bg-slate-950/40 border-y border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-blue dark:text-blue-400 mb-3">The Old Agency Model Is Broken</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">Why Local Service Businesses Hate Buying Websites</p>
+  <!-- Section 2: The Problem with Traditional Web Agencies -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-400/20 text-rose-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+          <span>WHY WE CHANGED THE MODEL</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
+          Local business owners have been burned by outdated agency models for decades.
+        </h2>
+        <p class="text-slate-400 text-base mt-4">
+          The traditional agency model transfers 100% of the risk to you. Here is why local businesses are ditching it for Web Harbor.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- 3 Equal-Height Spotlight Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
         <!-- Card 1 -->
-        <div
-          data-tilt
-          class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300"
-        >
-          <div class="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-mono font-bold text-lg">
+              01
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Massive Upfront Risk <span class="text-rose-400 font-mono text-base block font-normal mt-1">($3,000 – $7,000)</span>
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Agencies charge $3,000 to $7,000 before writing a single line of code. You take 100% of the financial risk on empty wireframes and vague timelines.
+            </p>
           </div>
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Massive Upfront Risk</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Agencies demand $3,000 to $7,000 before writing a single line of code. If you dislike the result after 3 months of meetings, your money is already gone.
-          </p>
+          <div class="mt-auto pt-6 text-xs font-mono text-slate-400 border-t border-white/[0.06]">
+            Web Harbor: $0 Upfront Spec Prototype
+          </div>
         </div>
 
         <!-- Card 2 -->
-        <div
-          data-tilt
-          class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300"
-        >
-          <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-mono font-bold text-lg">
+              02
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Forgotten After Launch <span class="text-amber-400 font-mono text-base block font-normal mt-1">($150/hr Bills)</span>
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Once delivered, traditional agencies disappear. Need a menu update, pricing tweak, or phone number change? Expect a $150/hr invoice and a two-week wait.
+            </p>
           </div>
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Forgotten After Launch</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Once traditional agencies hand over files, they vanish. Need a phone number changed, seasonal pricing updated, or a broken SSL fixed? Expect an invoice for $150/hour.
-          </p>
+          <div class="mt-auto pt-6 text-xs font-mono text-slate-400 border-t border-white/[0.06]">
+            Web Harbor: 3 Monthly Edits Included at $0 Extra
+          </div>
         </div>
 
         <!-- Card 3 -->
-        <div
-          data-tilt
-          class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md transition-all duration-300"
-        >
-          <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6 shadow-xs">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <div class="spotlight-card flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35" data-reveal>
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-mono font-bold text-lg">
+              03
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              Bloated &amp; Broken Code <span class="text-rose-400 font-mono text-base block font-normal mt-1">(8.0s Load Times)</span>
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Clunky WordPress setups stacked with 40 vulnerable plugins that crash during updates, take 8 seconds to load on mobile, and repel paying customers.
+            </p>
           </div>
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">Bloated &amp; Broken</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Most agencies deploy fragile WordPress themes with 40 plugins that crash on every update, load sluggishly on mobile, and repel clients searching on Google.
-          </p>
+          <div class="mt-auto pt-6 text-xs font-mono text-slate-400 border-t border-white/[0.06]">
+            Web Harbor: 0.4s Static Cloudflare Edge Speed
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. The Web Harbor Advantage (Comparison Table with Staggered Rows) -->
-  <section class="py-16 md:py-24 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-teal dark:text-teal-400 mb-3">Side-by-Side Reality Check</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">The Web Harbor Advantage</p>
-      </div>
-
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl shadow-card border border-slate-200 dark:border-slate-800 overflow-hidden">
-          <thead>
-            <tr class="border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950/70">
-              <th class="p-5 text-sm font-bold text-slate-700 dark:text-slate-300">Feature</th>
-              <th class="p-5 text-sm font-semibold text-slate-500 dark:text-slate-400">Traditional Agency</th>
-              <th class="p-5 text-sm font-semibold text-slate-500 dark:text-slate-400">DIY Builders (Wix/Squarespace)</th>
-              <th class="p-5 text-sm font-bold text-accent-blue dark:text-blue-400 bg-blue-50/50 dark:bg-blue-950/40">Web Harbor Solutions</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80 text-sm">
-            <tr>
-              <td class="p-5 font-semibold text-primary-dark dark:text-slate-200">Upfront Cost</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">$3,000 – $10,000</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">Your personal time + $30/mo</td>
-              <td class="p-5 font-bold text-emerald-600 dark:text-emerald-400 bg-blue-50/30 dark:bg-blue-950/20">$100 Setup (split 50/50)</td>
-            </tr>
-            <tr>
-              <td class="p-5 font-semibold text-primary-dark dark:text-slate-200">See It Before Paying</td>
-              <td class="p-5 text-red-600 dark:text-red-400">Never (Wireframes only)</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">No (You build it yourself)</td>
-              <td class="p-5 font-bold text-emerald-600 dark:text-emerald-400 bg-blue-50/30 dark:bg-blue-950/20">Yes (100% Free Live Demo)</td>
-            </tr>
-            <tr>
-              <td class="p-5 font-semibold text-primary-dark dark:text-slate-200">Monthly Maintenance</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">$150+/hour extra</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">You diagnose and fix it</td>
-              <td class="p-5 font-bold text-emerald-600 dark:text-emerald-400 bg-blue-50/30 dark:bg-blue-950/20">Included (3 Edits/Month)</td>
-            </tr>
-            <tr>
-              <td class="p-5 font-semibold text-primary-dark dark:text-slate-200">Hosting &amp; Domain</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">Extra monthly invoice</td>
-              <td class="p-5 text-slate-600 dark:text-slate-400">Included with bandwidth caps</td>
-              <td class="p-5 font-bold text-emerald-600 dark:text-emerald-400 bg-blue-50/30 dark:bg-blue-950/20">Included at $0 extra</td>
-            </tr>
-            <tr>
-              <td class="p-5 font-semibold text-primary-dark dark:text-slate-200">Mobile PageSpeed Score</td>
-              <td class="p-5 text-amber-600 dark:text-amber-400">40–70 (Bloated plugins)</td>
-              <td class="p-5 text-amber-600 dark:text-amber-400">50–70 (Iframe heavy)</td>
-              <td class="p-5 font-bold text-emerald-600 dark:text-emerald-400 bg-blue-50/30 dark:bg-blue-950/20">95–100 (Static Edge Speed)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <!-- Section 3: The Web Harbor Advantage (Comparison Table) -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal>
+      <ComparisonTable />
     </div>
   </section>
 
-  <!-- 4. Interactive ROI & Cost Calculator (Phase 4 Component) -->
-  <section class="py-16 md:py-24 relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+  <!-- Section 4: Interactive ROI Calculator -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-reveal>
       <RoiCalculator />
     </div>
   </section>
 
-  <!-- 5. 3-Step Social Proof / How We Work (With Tilt Cards) -->
-  <section class="py-16 md:py-24 bg-white/50 dark:bg-slate-950/40 border-y border-slate-200/80 dark:border-slate-800/80 backdrop-blur-md relative z-10">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-xs uppercase tracking-wider font-bold text-accent-blue dark:text-blue-400 mb-3">Our 3-Step Zero-Risk Model</h2>
-        <p class="text-3xl font-extrabold text-primary-dark dark:text-slate-50 font-display">How We Earn Your Business</p>
+  <!-- Section 5: The 3-Step Spec-First Process Preview -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>HOW WE WORK WITH YOU</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
+          From Zero to Live Website in 3 Simple Steps
+        </h2>
+        <p class="text-slate-400 text-base mt-4">
+          No endless wireframe meetings or opaque change orders. Just clear engineering delivered on a live link.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md">
-          <div class="w-10 h-10 rounded-full bg-accent-blue text-white font-bold flex items-center justify-center mb-6 shadow-xs">1</div>
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">We Find &amp; Research</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            We analyze your business, your Google Maps listings, verified customer reviews, and local service competitors in your city.
-          </p>
+      <!-- 3 Connected Step Cards with large 01, 02, 03 mono watermarks -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <!-- Step 1 -->
+        <div class="spotlight-card relative flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35 overflow-hidden" data-reveal>
+          <div class="absolute -top-4 -right-2 text-7xl sm:text-8xl font-mono font-extrabold text-white/[0.04] pointer-events-none select-none">
+            01
+          </div>
+          <div class="space-y-4 relative z-10">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-400/20 text-xs font-mono font-bold">
+              STEP 01
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              We Research &amp; Architect
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Tell us your business name and goals. We analyze your local market, competitors, and conversion bottlenecks without wasting your time on 3-hour discovery calls.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-slate-400 font-mono relative z-10 border-t border-white/[0.06]">
+            Time: Hours 0–24
+          </div>
         </div>
 
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md">
-          <div class="w-10 h-10 rounded-full bg-accent-teal text-white font-bold flex items-center justify-center mb-6 shadow-xs">2</div>
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">We Build the Demo</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Our engineering team hand-codes a custom, mobile-responsive prototype on our test edge network within 48 business hours.
-          </p>
+        <!-- Step 2 -->
+        <div class="spotlight-card relative flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35 overflow-hidden" data-reveal>
+          <div class="absolute -top-4 -right-2 text-7xl sm:text-8xl font-mono font-extrabold text-white/[0.04] pointer-events-none select-none">
+            02
+          </div>
+          <div class="space-y-4 relative z-10">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-400/20 text-xs font-mono font-bold">
+              STEP 02
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              We Build Your Live Spec Demo ($0)
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Within 48 to 72 hours, our engineering team builds a working, custom-designed preview hosted on a private staging link so you can test it on your phone and desktop.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-sky-400 font-mono relative z-10 border-t border-white/[0.06]">
+            Cost: $0 Upfront
+          </div>
         </div>
 
-        <div data-tilt class="p-8 rounded-3xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-card backdrop-blur-md">
-          <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center mb-6 shadow-xs">3</div>
-          <h3 class="text-xl font-bold text-primary-dark dark:text-slate-100 mb-3 font-display">You Decide</h3>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Love it? We launch it on your custom domain for $99/mo. Don't like it? Walk away with zero hassle and zero cost.
-          </p>
+        <!-- Step 3 -->
+        <div class="spotlight-card relative flex flex-col justify-between h-full rounded-2xl bg-slate-900/55 backdrop-blur-xl border border-white/[0.08] p-6 sm:p-8 transition-all duration-300 hover:border-sky-400/35 overflow-hidden" data-reveal>
+          <div class="absolute -top-4 -right-2 text-7xl sm:text-8xl font-mono font-extrabold text-white/[0.04] pointer-events-none select-none">
+            03
+          </div>
+          <div class="space-y-4 relative z-10">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-400/20 text-xs font-mono font-bold">
+              STEP 03
+            </div>
+            <h3 class="text-xl font-bold text-white tracking-tight">
+              You Decide (Zero Obligation)
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed">
+              Love it? Pay a $100 setup fee and $99/mo for all-inclusive hosting, domain, and 3 monthly updates. Don't love it? Walk away and pay $0.
+            </p>
+          </div>
+          <div class="mt-auto pt-6 text-xs text-emerald-400 font-mono relative z-10 border-t border-white/[0.06]">
+            Flexibility: Month-to-Month
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. Call to Action Banner -->
-  <section class="py-16 md:py-24 bg-primary-dark text-white relative z-10 overflow-hidden">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-      <h2 class="text-3xl sm:text-4xl font-extrabold font-display mb-4 tracking-tight">
-        Ready to see what your business looks like with a modern website?
-      </h2>
-      <p class="text-slate-300 text-base max-w-xl mx-auto mb-8">
-        Give us your business name and city. Our team will build and send you a live working demo link within 48 hours.
-      </p>
-      <a
-        href="/contact/"
-        class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-accent-blue hover:bg-accent-blue-hover shadow-lg hover:shadow-glow transition duration-200 gap-2 group"
-      >
-        <span>Request Your Free Custom Demo</span>
-        <svg class="w-5 h-5 group-hover:translate-x-1 transition duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="m9 18 6-6-6-6"></path>
-        </svg>
-      </a>
-      <p class="text-xs text-slate-400 mt-4">100% Free • No Credit Card Required • Zero Sales Calls</p>
+  <!-- Section 6: Industry Blueprint Preview Table -->
+  <section class="relative py-20 lg:py-28 border-t border-white/[0.08]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12" data-reveal>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+          <span>CONVERSION BLUEPRINTS</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+          Featured Industry Architecture Blueprints
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-2">
+          Pre-engineered conversion layouts built for high-ticket local service businesses.
+        </p>
+      </div>
+
+      <div data-reveal>
+        <IndustryBlueprintTable limit={4} showViewAll={true} />
+      </div>
     </div>
   </section>
+
+  <!-- Section 7: Bottom Conversion Banner -->
+  <CtaBanner />
 </BaseLayout>

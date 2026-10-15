@@ -1,89 +1,77 @@
 ---
+// src/layouts/BaseLayout.astro
+// Master base layout for Web Harbor Solutions with persistent 3D canvas and fluid motion stack
 import { ClientRouter } from 'astro:transitions';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Canvas3D from '../components/Canvas3D.astro';
+import SeoHead, { type FaqItem, type BreadcrumbItem } from '../components/SeoHead.astro';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  ogImage?: string;
+  type?: string;
+  faqs?: FaqItem[];
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 const {
-  title = 'Web Harbor Solutions | High-Converting Websites for Local Businesses',
-  description = 'We build your custom business website before you pay a dime. Fast, mobile-first websites with hosting and maintenance for just $99/month.',
-  canonical = Astro.url.href,
+  title,
+  description,
+  canonical,
+  ogImage,
+  type,
+  faqs,
+  breadcrumbs,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- OpenGraph / Social Metadata -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="Web Harbor Solutions" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Astro 5 ClientRouter for fluid View Transitions -->
+    <!-- Technical SEO, OpenGraph & JSON-LD Schemas -->
+    <SeoHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      type={type}
+      faqs={faqs}
+      breadcrumbs={breadcrumbs}
+    />
+
+    <!-- Astro ClientRouter for View Transitions -->
     <ClientRouter />
 
-    <!-- Anti-FOUC Theme Initialization (Synchronous execution before rendering) -->
+    <!-- Pure Dark Mode Enforcement -->
     <script is:inline>
-      (function () {
-        function resolveTheme() {
-          try {
-            const stored = localStorage.getItem('theme');
-            if (stored === 'dark' || stored === 'light') {
-              return stored;
-            }
-          } catch (_) {}
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-
-        const theme = resolveTheme();
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-      })();
-
-      // Preserve theme across Astro View Transitions swaps
+      document.documentElement.classList.add('dark');
       document.addEventListener('astro:after-swap', () => {
-        try {
-          const stored = localStorage.getItem('theme');
-          const isDark = stored
-            ? stored === 'dark'
-            : window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (isDark) {
-            document.documentElement.classList.add('dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-          }
-        } catch (_) {}
+        document.documentElement.classList.add('dark');
       });
     </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-bg-neutral dark:bg-slate-950 text-slate-800 dark:text-slate-100 selection:bg-accent-blue selection:text-white relative">
-    <!-- Persistent Full-Page Three.js 3D WebGL Background -->
+  <body class="min-h-screen flex flex-col bg-[#05070e] text-slate-300 selection:bg-sky-500 selection:text-slate-950 relative">
+    <!-- Persistent Full-Page Three.js WebGL Canvas -->
     <Canvas3D />
 
     <div class="relative z-10 flex flex-col min-h-screen">
-      <Navbar currentPath={Astro.url.pathname} />
+      <Navbar />
 
       <main id="main-content" class="flex-1">
         <slot />
@@ -92,7 +80,7 @@ const {
       <Footer />
     </div>
 
-    <!-- Lenis Smooth Inertia Scrolling + GSAP ScrollTrigger Integration Script -->
+    <!-- Fluid Motion Controller: Lenis + GSAP ScrollTrigger + Spotlight + Magnetic Button -->
     <script>
       import Lenis from 'lenis';
       import gsap from 'gsap';
@@ -100,24 +88,22 @@ const {
 
       gsap.registerPlugin(ScrollTrigger);
 
-      let lenisInstance: Lenis | null = null;
-      let tickerFn: ((time: number) => void) | null = null;
+      let lenis: Lenis | null = null;
+      let tickerCallback: ((time: number) => void) | null = null;
 
-      function initSmoothScroll() {
-        // Destroy existing instance to prevent duplicate scroll events across transitions
-        if (lenisInstance) {
-          lenisInstance.destroy();
-          lenisInstance = null;
+      function initLenis() {
+        if (lenis) {
+          lenis.destroy();
+          lenis = null;
         }
 
-        if (tickerFn) {
-          gsap.ticker.remove(tickerFn);
-          tickerFn = null;
+        if (tickerCallback) {
+          gsap.ticker.remove(tickerCallback);
+          tickerCallback = null;
         }
 
-        // Initialize Lenis with inertia and momentum
-        lenisInstance = new Lenis({
-          duration: 1.2,
+        lenis = new Lenis({
+          duration: 1.1,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           orientation: 'vertical',
           gestureOrientation: 'vertical',
@@ -125,42 +111,79 @@ const {
           touchMultiplier: 1.5,
         });
 
-        // Expose to window for potential external access or debugging
-        (window as any).__lenis = lenisInstance;
-
-        // Synchronize Lenis scroll updates with GSAP ScrollTrigger
-        lenisInstance.on('scroll', () => {
+        lenis.on('scroll', () => {
           ScrollTrigger.update();
         });
 
-        // Synchronize GSAP RAF ticker with Lenis
-        tickerFn = (time: number) => {
-          lenisInstance?.raf(time * 1000);
+        tickerCallback = (time: number) => {
+          lenis?.raf(time * 1000);
         };
-        gsap.ticker.add(tickerFn);
-
-        // Turn off GSAP ticker lag smoothing for maximum responsiveness
+        gsap.ticker.add(tickerCallback);
         gsap.ticker.lagSmoothing(0);
-
-        // Recalculate ScrollTrigger markers and layout
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-        }, 50);
       }
 
-      import { initPageAnimations } from '../scripts/animations';
+      function initInteractiveBindings() {
+        // 1. GSAP Scroll Reveals ([data-reveal])
+        // Critical safety: NEVER permanently hide if JS hasn't run; fromTo autoAlpha
+        const revealElements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+        revealElements.forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 24, autoAlpha: 0 },
+            {
+              y: 0,
+              autoAlpha: 1,
+              duration: 0.65,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 88%',
+                once: true,
+              },
+            }
+          );
+        });
 
-      // Re-initialize Lenis and GSAP ScrollTrigger on every Astro View Transition page-load
+        // 2. Cursor-tracking Spotlight Cards
+        const spotlightCards = document.querySelectorAll<HTMLElement>('.spotlight-card');
+        spotlightCards.forEach((card) => {
+          card.addEventListener('mousemove', (e: MouseEvent) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+          });
+        });
+
+        // 3. Desktop Magnetic Button Pull (.magnetic-btn)
+        if (window.innerWidth >= 1024) {
+          const magneticButtons = document.querySelectorAll<HTMLElement>('.magnetic-btn');
+          magneticButtons.forEach((btn) => {
+            btn.addEventListener('mousemove', (e: MouseEvent) => {
+              const rect = btn.getBoundingClientRect();
+              const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+              const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+              gsap.to(btn, { x, y, duration: 0.2, ease: 'power2.out' });
+            });
+            btn.addEventListener('mouseleave', () => {
+              gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
+            });
+          });
+        }
+
+        ScrollTrigger.refresh();
+      }
+
       document.addEventListener('astro:page-load', () => {
-        initSmoothScroll();
-        initPageAnimations();
+        initLenis();
+        initInteractiveBindings();
       });
 
-      // Cleanup on before-swap to avoid memory leaks
       document.addEventListener('astro:before-swap', () => {
-        if (lenisInstance) {
-          lenisInstance.destroy();
-          lenisInstance = null;
+        if (lenis) {
+          lenis.destroy();
+          lenis = null;
         }
       });
     </script>

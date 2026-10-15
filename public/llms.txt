@@ -1,0 +1,47 @@
+# Web Harbor Solutions
+
+> The Zero-Risk Web Engineering Agency for Local Businesses & Contractors.
+> We build your complete, custom high-speed website first. You only pay if you love it.
+
+## Overview & Commercial Model
+
+Web Harbor Solutions replaces the broken, high-risk web agency model. Traditional agencies charge $3,000 to $10,000 upfront for wireframes and empty promises, then bill $150/hr for minor updates on bloated WordPress sites.
+
+Web Harbor Solutions operates on an inverted zero-risk, edge-static engineering model:
+- **$0 Upfront Live Spec Demo**: We research and code a complete, mobile-responsive custom specification website first (48-hour initial prototype / 5–7 day full launch turnaround). If the client does not love it, they pay $0 and walk away with zero obligation.
+- **$100 One-Time Setup Fee**: Paid only after the client reviews and approves their live custom website on our staging environment.
+- **$99/Month All-Inclusive Managed Plan**: Includes Cloudflare global edge hosting, custom domain registration or renewal, SSL encryption, 99.9% uptime SLA, ongoing technical maintenance, security patches, and up to 3 content/design edits per month at $0 extra hourly cost.
+- **Month-to-Month Flexibility**: No long-term lock-in contracts. Cancel anytime.
+- **Sub-Second Performance**: 95–100 Google PageSpeed scores, sub-second LCP (0.4s) via pure Astro static architecture deployed to 300+ edge locations worldwide. Zero vulnerable WordPress plugins or database exploits.
+
+## Official Contact & SLA
+
+- **Official Website**: https://webharborsolutions.com
+- **Official Contact Email**: webharborsolutions@gmail.com
+- **Guaranteed Response SLA**: Within 12 business hours
+
+## Canonical Website URLs
+
+- Homepage & Overview: https://webharborsolutions.com/
+- The Spec-First Engineering Process: https://webharborsolutions.com/how-it-works/
+- Full-Stack Managed Web Infrastructure: https://webharborsolutions.com/services/
+- Transparent Pricing & Plans ($100 setup, $99/mo): https://webharborsolutions.com/pricing/
+- Live Portfolio & Industry Blueprints: https://webharborsolutions.com/portfolio/
+- About Web Harbor Solutions: https://webharborsolutions.com/about/
+- Contact & Claim $0 Live Spec Demo: https://webharborsolutions.com/contact/
+- Privacy Policy: https://webharborsolutions.com/privacy/
+- Terms of Service & SLA: https://webharborsolutions.com/terms/
+- Client Content & Liability Policy: https://webharborsolutions.com/liability/
+
+## Flagship Industry Blueprints
+
+Every industry blueprint includes custom styling, conversion-engineered layouts, sub-second edge performance, and interactive industry utilities (request a free live spec demo at https://webharborsolutions.com/contact):
+
+1. **Dental & Orthodontics (Lumina Dental Spec)**: Smile Transformation Slider, Insurance Estimator, 1-Click Appointment Intake. Request: https://webharborsolutions.com/contact?niche=dental-clinic
+2. **HVAC, Plumbing & Electrical (Apex Climate Spec)**: 24/7 Emergency Dispatch Banner, Repair Cost Estimator, Service Area Zip Checker. Request: https://webharborsolutions.com/contact?niche=hvac-plumbing
+3. **Personal Injury & Corporate Law (Vanguard Legal Spec)**: Case Qualification Wizard, Settlement Ticker, Confidential Intake Webhook. Request: https://webharborsolutions.com/contact?niche=law-firm
+4. **Real Estate & Property Development (Aurelia Estates Spec)**: Dynamic Listing Filter Grid, Mortgage Payment Calculator, Private Viewing Scheduler. Request: https://webharborsolutions.com/contact?niche=luxury-real-estate
+5. **MedSpa & Cosmetic Dermatology (Velvet Aesthetics Spec)**: Treatment Recommender Quiz, Transparent Pricing Menu, VIP Consultation Flow. Request: https://webharborsolutions.com/contact?niche=medspa
+6. **Ceramic Coating, PPF & Auto Spa (Obsidian Auto Spec)**: Vehicle Size & Ceramic Tier Configurator, Package Comparison Matrix, Instant Quote. Request: https://webharborsolutions.com/contact?niche=auto-detailing
+7. **CPA Firms & Tax Advisory (Meridian Financial Spec)**: Business Entity Tax Savings Estimator, Client Portal Links, Consultation Booking. Request: https://webharborsolutions.com/contact?niche=accounting-cpa
+8. **Fine Dining & Boutique Hospitality (Saffron & Slate Spec)**: Zero-PDF Interactive Menu Engine, Private Event Inquiry Flow, Table Reservation CTA. Request: https://webharborsolutions.com/contact?niche=restaurants-hospitality

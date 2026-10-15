@@ -1,0 +1,46 @@
+---
+// src/pages/404.astro
+// Sleek dark-mode 404 page matching Section 7.10 specifications
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = '404 - Page Not Found | Web Harbor Solutions';
+const seoDesc = 'The requested page could not be located on the Web Harbor Solutions edge network. Return to homepage or claim your $0 spec demo.';
+---
+
+<BaseLayout title={seoTitle} description={seoDesc}>
+  <main class="min-h-[70vh] flex items-center justify-center py-20 px-4 sm:px-6 relative z-10">
+    <div class="spotlight-card max-w-xl w-full rounded-3xl bg-slate-900/60 border border-white/10 p-8 sm:p-12 text-center backdrop-blur-xl shadow-2xl space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-400/20 text-rose-400 text-xs font-mono uppercase tracking-widest">
+        <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-pulse"></span>
+        <span>ERROR 404: EDGE ROUTE NOT FOUND</span>
+      </div>
+
+      <div class="text-7xl sm:text-8xl font-extrabold text-white font-mono tracking-tight">
+        404
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+        Lost at Sea? This Route Doesn't Exist.
+      </h1>
+
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+        The page you are looking for has been moved, removed, or never existed on our edge network. Return safely to our harbor or test-drive your custom website for free.
+      </p>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/"
+          class="magnetic-btn w-full sm:w-auto px-6 py-3.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/20 transition-all text-center"
+        >
+          <span>Return Home →</span>
+        </a>
+        <a
+          href="/contact"
+          class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-white font-semibold text-sm transition-all text-center"
+        >
+          <span>Claim $0 Demo</span>
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

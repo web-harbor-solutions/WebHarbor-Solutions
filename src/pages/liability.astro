@@ -1,65 +1,68 @@
 ---
 // src/pages/liability.astro
+// Client Content & Liability Policy strictly adhering to Section 1 & Section 7.10
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = 'Client Content & Liability Agreement | Web Harbor Solutions';
+const seoDesc = 'Client content ownership, regulatory compliance guidelines, intellectual property representations, and liability limitations for Web Harbor Solutions.';
 ---
 
-<BaseLayout
-  title="Content & Legal Liability Agreement | Web Harbor Solutions"
-  description="Disclosure defining client responsibility for website copy, regulatory compliance, licensing, and published claims."
-  canonical="https://webharborsolutions.com/liability/"
->
-  <main class="py-16 md:py-24 relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="bg-white/80 dark:bg-slate-900/80 p-8 sm:p-14 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md space-y-8">
+<BaseLayout title={seoTitle} description={seoDesc}>
+  <main class="py-20 lg:py-28 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto p-8 sm:p-14 rounded-3xl bg-slate-900/60 border border-white/[0.08] shadow-2xl backdrop-blur-xl space-y-10 text-white relative overflow-hidden">
         <div>
-          <span class="text-xs font-bold text-accent-blue dark:text-blue-400 uppercase tracking-wider">Legal Responsibility &amp; Indemnity</span>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-slate-50 mt-1 font-display">Client Content &amp; Liability Agreement</h1>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Last Updated: October 2026 • Published Claims, Licensing &amp; Warranty Guidelines</p>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span>LEGAL SAFEGUARDS</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">Client Content &amp; Liability Policy</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-2 font-mono">Last Updated: October 2026 • Content Integrity &amp; Regulatory Responsibility</p>
         </div>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">1. Content Accuracy &amp; Client Warranty</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            The Client explicitly affirms and warrants that all commercial claims, pricing figures, licensing credentials, business certifications, warranties, trade hours, photos, and branding assets supplied or approved for publication on the website are true, accurate, up to date, and lawfully owned or licensed by the Client.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">1. Client Content Ownership &amp; Warranties</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            The Client warrants that all trademarks, logos, photography, commercial copy, licensing numbers, and service claims supplied or approved for publication on the website are lawfully owned or licensed by the Client. The Client retains all intellectual property rights in their supplied materials.
           </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">2. Limitation of Liability</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Web Harbor Solutions functions solely as an engineering design, development, and hosting infrastructure provider. Under no circumstances shall Web Harbor Solutions, its operating team, officers, or technical contractors be held legally or financially liable for damages, claims, regulatory enforcement actions, or loss of revenue resulting from:
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">2. Industry Regulatory Compliance</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            The Client bears sole legal responsibility for ensuring that all published business claims, pricing structures, medical/health disclaimers, contractor license numbers, legal advertising notices, and trade disclosures adhere to relevant municipal, state, federal, and national trade authorities (e.g. state dental boards, bar associations, medical aesthetic guidelines, or EPA regulations).
           </p>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li>Inaccurate or misleading service pricing, guarantees, or descriptions published at the Client's instruction.</li>
-            <li>Failure of the Client to maintain active trade licenses, state certifications, or mandated local insurance coverage.</li>
-            <li>Copyright, trademark, or intellectual property disputes regarding client-submitted logos, slogans, or imagery.</li>
-            <li>Third-party network outages or unforeseen DNS registry interruptions outside of Cloudflare's core control.</li>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">3. Limitation of Liability</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Web Harbor Solutions operates exclusively as a frontend web engineering and managed edge infrastructure provider. Under no circumstances shall Web Harbor Solutions, its engineering team, or directors be liable for indirect, incidental, or consequential damages resulting from:
+          </p>
+          <ul class="space-y-2 text-sm sm:text-base text-slate-300 leading-relaxed list-disc list-inside">
+            <li>Inaccurate or outdated business pricing, warranty claims, or service disclosures provided by the Client.</li>
+            <li>Failure of the Client to maintain active commercial licenses, state permits, or mandated trade insurance.</li>
+            <li>Third-party intellectual property infringement claims regarding client-provided logos, images, or copy.</li>
+            <li>External upstream registrar or telecom carrier outages outside of Cloudflare's core infrastructure.</li>
           </ul>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">3. Trade Compliance &amp; Consumer Protection</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Client is solely responsible for ensuring their advertised services comply with all municipal, state, federal, and national trade laws (including EPA regulations for HVAC contractors, plumbing codes, health department standards for food establishments, and state licensing boards for clinical practitioners). Web Harbor Solutions will immediately remove or correct any published claim upon written notice of regulatory non-compliance.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">4. Copyright Transfer &amp; License</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Upon activation of the $100 setup fee and active $99/mo subscription, Web Harbor Solutions grants the Client an exclusive, royalty-free commercial license to utilize the compiled frontend design, layouts, and tailored assets for the duration of the website's operation.
           </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">4. Mutual Indemnification</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Client agrees to indemnify, defend, and hold harmless Web Harbor Solutions, its operating team, directors, and personnel against any and all claims, liabilities, losses, costs, or legal defense expenses arising from third-party actions regarding commercial services or goods sold by Client through or in connection with the website.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">5. Contact &amp; Content Takedown Requests</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            If you are a trademark owner or consumer reporting a content concern on a domain managed by Web Harbor Solutions, please contact our compliance inbox:
           </p>
-        </section>
-
-        <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">5. Notice &amp; Takedown Procedure</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            If you believe content hosted on a Web Harbor Solutions client domain infringes upon copyright or violates consumer truth-in-advertising statutes, please contact our compliance team directly at:
-          </p>
-          <div class="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 mt-2 space-y-1">
-            <p><strong class="text-primary-dark dark:text-slate-100">Web Harbor Solutions Compliance</strong></p>
-            <p>Email: <a href="mailto:webharborsolutions@gmail.com" class="text-accent-teal hover:underline font-semibold">webharborsolutions@gmail.com</a></p>
-            <p>Guaranteed Technical Response: Within 24 business hours</p>
+          <div class="p-6 rounded-2xl bg-slate-950/70 border border-white/10 text-xs sm:text-sm text-slate-300 space-y-1.5 font-mono">
+            <p><strong class="text-white">Web Harbor Solutions Compliance Team</strong></p>
+            <p>Direct Email: <a href="mailto:webharborsolutions@gmail.com" class="text-sky-400 hover:underline">webharborsolutions@gmail.com</a></p>
+            <p>Guaranteed Triage SLA: Within 12 business hours</p>
           </div>
         </section>
       </div>

@@ -1,0 +1,181 @@
+---
+// src/components/IndustryBlueprintTable.astro
+// Executive Architecture Table with category filters and direct spec demo requests
+import { PORTFOLIO_BLUEPRINTS } from '../data/portfolioBlueprints';
+
+interface Props {
+  limit?: number;
+  showFilters?: boolean;
+  showViewAll?: boolean;
+}
+
+const {
+  limit,
+  showFilters = false,
+  showViewAll = false,
+} = Astro.props;
+
+const blueprints = limit ? PORTFOLIO_BLUEPRINTS.slice(0, limit) : PORTFOLIO_BLUEPRINTS;
+
+const categories = [
+  'All Industries',
+  'Healthcare & Medical',
+  'Home Services',
+  'Legal & Financial',
+  'Luxury & Automotive',
+];
+---
+
+<div class="industry-table-root w-full">
+  {showFilters && (
+    <div class="flex flex-wrap items-center justify-center gap-2 mb-8">
+      {categories.map((cat, idx) => (
+        <button
+          type="button"
+          data-category-filter={cat}
+          class={`cat-filter-btn px-4 py-2 rounded-xl text-xs font-mono uppercase tracking-wider transition-all duration-200 border ${
+            idx === 0
+              ? 'active bg-sky-500/15 border-sky-400 text-sky-400 font-semibold shadow-xs'
+              : 'bg-slate-900/50 border-white/10 text-slate-400 hover:text-white hover:border-white/20'
+          }`}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+  )}
+
+  <div class="overflow-x-auto rounded-2xl border border-white/[0.08] bg-slate-900/60 backdrop-blur-xl shadow-2xl">
+    <table class="w-full text-left border-collapse min-w-[820px]">
+      <thead>
+        <tr class="border-b border-white/[0.08] bg-white/[0.03]">
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-slate-400">
+            Industry &amp; Architecture
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-slate-400">
+            Included Conversion Tools
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-slate-400">
+            Edge Performance
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-slate-400">
+            Agency vs. Web Harbor
+          </th>
+          <th class="py-4 px-6 text-xs font-mono uppercase tracking-wider text-sky-400 text-right">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-white/[0.06] text-sm" id="blueprint-table-body">
+        {blueprints.map((item) => (
+          <tr
+            id={item.slug}
+            data-category={item.category}
+            class="blueprint-row hover:bg-white/[0.02] transition-colors"
+          >
+            <!-- Industry & Architecture -->
+            <td class="py-5 px-6">
+              <div class="font-bold text-white text-base mb-1">
+                {item.name}
+              </div>
+              <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono">
+                <span>{item.specCode}</span>
+              </div>
+            </td>
+
+            <!-- Included Features -->
+            <td class="py-5 px-6">
+              <ul class="space-y-1 text-xs text-slate-300">
+                {item.keyFeatures.slice(0, 3).map((feat) => (
+                  <li class="flex items-center gap-1.5">
+                    <span class="w-1 h-1 rounded-full bg-sky-400 shrink-0"></span>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </td>
+
+            <!-- Speed & Lighthouse -->
+            <td class="py-5 px-6">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono font-bold text-xs tabular-nums">
+                  {item.lighthouseScore}/100
+                </span>
+                <span class="text-xs text-slate-400 font-mono tabular-nums">
+                  {item.lcpSpeed} LCP
+                </span>
+              </div>
+            </td>
+
+            <!-- Pricing Comparison -->
+            <td class="py-5 px-6">
+              <div class="text-xs text-rose-400/90 line-through font-mono tabular-nums">
+                {item.agencyCostQuote}
+              </div>
+              <div class="font-bold text-sky-400 text-xs sm:text-sm font-mono tabular-nums mt-0.5">
+                {item.webHarborCost}
+              </div>
+            </td>
+
+            <!-- CTA Button -->
+            <td class="py-5 px-6 text-right">
+              <a
+                href={item.ctaUrl}
+                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs transition-all shadow-md shadow-sky-500/15 whitespace-nowrap"
+              >
+                <span>Request Free Spec Demo →</span>
+              </a>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  {showViewAll && (
+    <div class="mt-8 text-center">
+      <a
+        href="/portfolio"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900/80 border border-white/10 hover:border-sky-400/40 text-slate-200 hover:text-white text-sm font-medium transition-all shadow-lg"
+      >
+        <span>Explore All 8 Industry Blueprints Matrix</span>
+        <span>→</span>
+      </a>
+    </div>
+  )}
+</div>
+
+<script>
+  function initIndustryFilters() {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.cat-filter-btn');
+    const rows = document.querySelectorAll<HTMLElement>('.blueprint-row');
+
+    if (!filterBtns.length || !rows.length) return;
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const selectedCat = btn.getAttribute('data-category-filter');
+
+        // Update active filter button
+        filterBtns.forEach((b) => {
+          b.classList.remove('active', 'bg-sky-500/15', 'border-sky-400', 'text-sky-400', 'font-semibold', 'shadow-xs');
+          b.classList.add('bg-slate-900/50', 'border-white/10', 'text-slate-400');
+        });
+        btn.classList.add('active', 'bg-sky-500/15', 'border-sky-400', 'text-sky-400', 'font-semibold', 'shadow-xs');
+        btn.classList.remove('bg-slate-900/50', 'border-white/10', 'text-slate-400');
+
+        // Filter rows
+        rows.forEach((row) => {
+          const rowCat = row.getAttribute('data-category');
+          if (selectedCat === 'All Industries' || rowCat === selectedCat) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initIndustryFilters);
+</script>

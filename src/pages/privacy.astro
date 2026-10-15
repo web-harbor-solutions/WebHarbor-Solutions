@@ -1,88 +1,74 @@
 ---
 // src/pages/privacy.astro
+// Privacy Policy strictly adhering to Section 1 & Section 7.10
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoTitle = 'Privacy Policy | Web Harbor Solutions';
+const seoDesc = 'Privacy policy and data governance disclosures for Web Harbor Solutions. Covers form submissions, cookie-free analytics, and Cloudflare edge security.';
 ---
 
-<BaseLayout
-  title="Privacy Policy | Web Harbor Solutions"
-  description="Privacy Policy and data handling disclosures for Web Harbor Solutions. Compliant with US FTC, CAN-SPAM, and global data privacy standards."
-  canonical="https://webharborsolutions.com/privacy/"
->
-  <main class="py-16 md:py-24 relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6">
-      <div class="bg-white/80 dark:bg-slate-900/80 p-8 sm:p-14 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-card backdrop-blur-md space-y-8">
+<BaseLayout title={seoTitle} description={seoDesc}>
+  <main class="py-20 lg:py-28 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto p-8 sm:p-14 rounded-3xl bg-slate-900/60 border border-white/[0.08] shadow-2xl backdrop-blur-xl space-y-10 text-white relative overflow-hidden">
         <div>
-          <span class="text-xs font-bold text-accent-blue dark:text-blue-400 uppercase tracking-wider">Regulatory Compliance</span>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-primary-dark dark:text-slate-50 mt-1 font-display">Privacy Policy</h1>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Last Updated: October 2026 • Compliant with US FTC, CAN-SPAM &amp; International Standards</p>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/20 text-sky-400 text-xs font-mono uppercase tracking-widest mb-3">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span>DATA GOVERNANCE</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">Privacy Policy</h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-2 font-mono">Last Updated: October 2026 • Privacy-First Edge Infrastructure</p>
         </div>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">1. Introduction</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Web Harbor Solutions ("we," "our," or "us") operates the website <code class="text-accent-blue dark:text-blue-400 font-mono text-xs">webharborsolutions.com</code> and provides web design, hosting management, and digital maintenance services. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website, submit demo requests, or engage our digital services.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">1. Overview</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            Web Harbor Solutions ("we," "our," or "us") operates <code class="text-sky-400 font-mono text-xs bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">webharborsolutions.com</code>. We provide modern web engineering, managed edge hosting, and ongoing digital maintenance for local service businesses. We respect your privacy and are committed to transparent, cookie-free data practices.
           </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">2. Information We Collect</h2>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li><strong>Information You Voluntarily Provide:</strong> When you submit a demo request, contact form, or sign up for services, we collect your name, business name, physical service region, email address, and phone number.</li>
-            <li><strong>Publicly Available Information:</strong> In accordance with standard commercial research, we may examine publicly available business data (such as Google Maps profiles, public reviews, and commercial phone numbers) to prepare customized website prototypes.</li>
-            <li><strong>Automated Technical Data:</strong> When you visit our website, our edge infrastructure provider (Cloudflare) automatically logs standard, anonymized network information such as IP addresses, browser types, and access timestamps for security and performance audits.</li>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">2. Information We Collect</h2>
+          <ul class="space-y-2 text-sm sm:text-base text-slate-300 leading-relaxed list-disc list-inside">
+            <li><strong>Contact Form Inquiries:</strong> When you submit a request for a $0 Live Spec Demo or contact our team, we collect your name, business name, work email address, phone number, website URL, and project notes.</li>
+            <li><strong>Publicly Available Commercial Data:</strong> To architect your custom live prototype before payment, our engineering team inspects publicly available information such as your existing business website, Google Maps listing, publicly posted service menus, and public reviews.</li>
+            <li><strong>Edge Infrastructure &amp; Security Logs:</strong> Our edge hosting provider (Cloudflare) records standard, anonymized network connection telemetry (IP address, user agent, requested URL, and timestamp) solely for DDoS mitigation, bot prevention, and network routing.</li>
           </ul>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">3. How We Use Your Information</h2>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li>To design, code, and host demonstration website prototypes tailored specifically to your trade.</li>
-            <li>To deliver private preview links via email or messaging channels.</li>
-            <li>To manage ongoing edge hosting, custom domain configuration, and monthly maintenance edits.</li>
-            <li>To respond directly to client inquiries and provide ongoing technical support.</li>
-            <li>To comply with legal obligations, including tax, business filings, and anti-fraud regulations.</li>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">3. Privacy-First &amp; Cookie-Free Analytics</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            We do not use invasive third-party cross-site advertising cookies or tracking pixels. Any traffic metrics collected are aggregated, cookieless, and respect global Do Not Track (DNT) headers.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">4. How We Use Your Data</h2>
+          <ul class="space-y-2 text-sm sm:text-base text-slate-300 leading-relaxed list-disc list-inside">
+            <li>To engineer, host, and deliver your custom working website prototype on a private staging link.</li>
+            <li>To send you the preview link and communicate revisions within our guaranteed 12-hour response SLA.</li>
+            <li>To manage DNS cutover, custom domain registration, and ongoing monthly technical maintenance upon client approval.</li>
+            <li>We do not sell, rent, monetize, or trade your contact or business data to any third party or marketing broker.</li>
           </ul>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">4. CAN-SPAM Act Compliance &amp; Opt-Out Policy</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            Web Harbor Solutions strictly adheres to the United States CAN-SPAM Act of 2003:
-          </p>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li>All outbound commercial communications clearly identify Web Harbor Solutions and our valid contact email (<code class="text-accent-teal font-mono text-xs">webharborsolutions@gmail.com</code>).</li>
-            <li>We honor all opt-out and unsubscribe requests within 24 business hours. If you reply "STOP" or "UNSUBSCRIBE" to any email, your contact information is immediately and permanently removed from our active outreach database.</li>
-            <li>We do not utilize deceptive subject headings or misleading sender information.</li>
-          </ul>
-        </section>
-
-        <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">5. Data Sharing &amp; Third-Party Services</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            We will <strong>never</strong> sell, rent, or trade your personal or business data to third parties, data brokers, or marketing networks. We only share information with trusted technical infrastructure providers necessary to operate our service:
-          </p>
-          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed list-disc list-inside">
-            <li><strong>Cloudflare Inc.:</strong> Global Content Delivery Network (CDN), edge security, DNS management, and static hosting infrastructure.</li>
-            <li><strong>Domain Registrars:</strong> ICANN-accredited domain registrars strictly for configuring your custom website domain.</li>
-          </ul>
-        </section>
-
-        <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">6. Security &amp; Retention</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            We implement modern encryption and access restrictions across all client records and code repositories. We retain client data only as long as necessary to provide ongoing web services or comply with legal and tax obligations.
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">5. Data Retention &amp; Security</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            We maintain strict access controls and encrypted communication channels. Inbound demo requests and project notes are retained only as long as necessary to service your inquiry or active subscription. You may request permanent deletion of your submission records at any time.
           </p>
         </section>
 
         <section class="space-y-3">
-          <h2 class="text-xl font-bold text-primary-dark dark:text-slate-50 font-display">7. Contact Information</h2>
-          <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-            If you have questions regarding this Privacy Policy or wish to exercise data access, correction, or deletion rights, please contact our team directly at:
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">6. Direct Privacy Contact</h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            For questions or requests concerning your data, please contact our team directly:
           </p>
-          <div class="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 mt-2 space-y-1">
-            <p><strong class="text-primary-dark dark:text-slate-100">Web Harbor Solutions</strong></p>
-            <p>Attention: Privacy Compliance Team</p>
-            <p>Email: <a href="mailto:webharborsolutions@gmail.com" class="text-accent-teal hover:underline font-semibold">webharborsolutions@gmail.com</a></p>
+          <div class="p-6 rounded-2xl bg-slate-950/70 border border-white/10 text-xs sm:text-sm text-slate-300 space-y-1.5 font-mono">
+            <p><strong class="text-white">Web Harbor Solutions</strong></p>
+            <p>Direct Email: <a href="mailto:webharborsolutions@gmail.com" class="text-sky-400 hover:underline">webharborsolutions@gmail.com</a></p>
+            <p>Guaranteed Response: Within 12 business hours</p>
           </div>
         </section>
       </div>
